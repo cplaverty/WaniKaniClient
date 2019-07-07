@@ -5,7 +5,10 @@ public struct Reading: Codable, Equatable {
     public let isPrimary: Bool
     public let isAcceptedAnswer: Bool
     
-    public init(type: ReadingType? = nil, reading: String, isPrimary: Bool, isAcceptedAnswer: Bool) {
+    public init(type: ReadingType? = nil,
+                reading: String,
+                isPrimary: Bool,
+                isAcceptedAnswer: Bool) {
         self.type = type
         self.reading = reading
         self.isPrimary = isPrimary

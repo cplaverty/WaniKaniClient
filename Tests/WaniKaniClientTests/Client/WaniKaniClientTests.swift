@@ -49,7 +49,7 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":null},"total_count":1,"data_updated_at":null,"data":[{"string":"content"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":null},"total_count":1,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         
@@ -57,7 +57,7 @@ final class WaniKaniClientTests: XCTestCase {
                                           url: requestURL,
                                           pages: ResourceCollectionPages(previousURL: nil, nextURL: nil, itemsPerPage: 1),
                                           totalCount: 1,
-                                          dataUpdatedAt: nil,
+                                          dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
                                           data: [TestResource(string: "content")])
         
         let urlSession = makeURLSession()
@@ -90,7 +90,7 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":2,"data_updated_at":null,"data":[{"string":"content"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         MockURLProtocol.requestHandler[requestURLPage2] = { request in
@@ -98,7 +98,7 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURLPage2.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":"\#(requestURL)"},"total_count":2,"data_updated_at":null,"data":[{"string":"content2"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURLPage2.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":"\#(requestURL)"},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content2"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         
@@ -106,13 +106,13 @@ final class WaniKaniClientTests: XCTestCase {
                                             url: requestURL,
                                             pages: ResourceCollectionPages(previousURL: nil, nextURL: requestURLPage2, itemsPerPage: 1),
                                             totalCount: 2,
-                                            dataUpdatedAt: nil,
+                                            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
                                             data: [TestResource(string: "content")]),
                          ResourceCollection(object: "collection",
                                             url: requestURLPage2,
                                             pages: ResourceCollectionPages(previousURL: requestURL, nextURL: nil, itemsPerPage: 1),
                                             totalCount: 2,
-                                            dataUpdatedAt: nil,
+                                            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
                                             data: [TestResource(string: "content2")])]
         
         let urlSession = makeURLSession()

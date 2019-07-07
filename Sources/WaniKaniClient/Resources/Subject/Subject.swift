@@ -7,8 +7,7 @@ public struct Subject: Codable, Equatable {
     public let dataUpdatedAt: Date
     public let data: SubjectData
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Radical)
-    {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Radical) {
         self.id = id
         self.objectType = .radical
         self.url = url
@@ -16,8 +15,7 @@ public struct Subject: Codable, Equatable {
         self.data = .radical(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Kanji)
-    {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Kanji) {
         self.id = id
         self.objectType = .kanji
         self.url = url
@@ -25,8 +23,7 @@ public struct Subject: Codable, Equatable {
         self.data = .kanji(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Vocabulary)
-    {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Vocabulary) {
         self.id = id
         self.objectType = .vocabulary
         self.url = url

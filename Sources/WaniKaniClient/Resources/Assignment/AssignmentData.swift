@@ -16,6 +16,36 @@ public struct AssignmentData: Codable, Equatable {
     public let isResurrected: Bool
     public let isHidden: Bool
     
+    public init(createdAt: Date,
+                subjectID: Int,
+                subjectType: SubjectType,
+                srsStage: Int,
+                srsStageName: String,
+                unlockedAt: Date? = nil,
+                startedAt: Date? = nil,
+                passedAt: Date? = nil,
+                burnedAt: Date? = nil,
+                availableAt: Date? = nil,
+                resurrectedAt: Date? = nil,
+                isPassed: Bool,
+                isResurrected: Bool,
+                isHidden: Bool) {
+        self.createdAt = createdAt
+        self.subjectID = subjectID
+        self.subjectType = subjectType
+        self.srsStage = srsStage
+        self.srsStageName = srsStageName
+        self.unlockedAt = unlockedAt
+        self.startedAt = startedAt
+        self.passedAt = passedAt
+        self.burnedAt = burnedAt
+        self.availableAt = availableAt
+        self.resurrectedAt = resurrectedAt
+        self.isPassed = isPassed
+        self.isResurrected = isResurrected
+        self.isHidden = isHidden
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case subjectID = "subject_id"

@@ -10,7 +10,27 @@ public struct ReviewData: Codable, Equatable {
     public let endingSRSStageName: String
     public let incorrectMeaningAnswers: Int
     public let incorrectReadingAnswers: Int
-
+    
+    public init(createdAt: Date,
+                assignmentID: Int,
+                subjectID: Int,
+                startingSRSStage: Int,
+                startingSRSStageName: String,
+                endingSRSStage: Int,
+                endingSRSStageName: String,
+                incorrectMeaningAnswers: Int,
+                incorrectReadingAnswers: Int) {
+        self.createdAt = createdAt
+        self.assignmentID = assignmentID
+        self.subjectID = subjectID
+        self.startingSRSStage = startingSRSStage
+        self.startingSRSStageName = startingSRSStageName
+        self.endingSRSStage = endingSRSStage
+        self.endingSRSStageName = endingSRSStageName
+        self.incorrectMeaningAnswers = incorrectMeaningAnswers
+        self.incorrectReadingAnswers = incorrectReadingAnswers
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case assignmentID = "assignment_id"

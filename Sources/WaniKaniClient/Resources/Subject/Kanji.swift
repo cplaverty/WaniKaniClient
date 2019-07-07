@@ -19,6 +19,42 @@ public struct Kanji: SubjectTypeData, Codable, Equatable {
     public let readingHint: String?
     public let lessonPosition: Int
     
+    public init(createdAt: Date,
+                level: Int,
+                slug: String,
+                hiddenAt: Date? = nil,
+                documentURL: URL,
+                characters: String,
+                meanings: [Meaning],
+                auxiliaryMeanings: [AuxiliaryMeaning] = [],
+                readings: [Reading],
+                componentSubjectIDs: [Int] = [],
+                amalgamationSubjectIDs: [Int] = [],
+                visuallySimilarSubjectIDs: [Int] = [],
+                meaningMnemonic: String,
+                meaningHint: String? = nil,
+                readingMnemonic: String,
+                readingHint: String? = nil,
+                lessonPosition: Int) {
+        self.createdAt = createdAt
+        self.level = level
+        self.slug = slug
+        self.hiddenAt = hiddenAt
+        self.documentURL = documentURL
+        self.characters = characters
+        self.meanings = meanings
+        self.auxiliaryMeanings = auxiliaryMeanings
+        self.readings = readings
+        self.componentSubjectIDs = componentSubjectIDs
+        self.amalgamationSubjectIDs = amalgamationSubjectIDs
+        self.visuallySimilarSubjectIDs = visuallySimilarSubjectIDs
+        self.meaningMnemonic = meaningMnemonic
+        self.meaningHint = meaningHint
+        self.readingMnemonic = readingMnemonic
+        self.readingHint = readingHint
+        self.lessonPosition = lessonPosition
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case level

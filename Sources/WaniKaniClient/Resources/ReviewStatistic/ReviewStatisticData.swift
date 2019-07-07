@@ -15,6 +15,34 @@ public struct ReviewStatisticData: Codable, Equatable {
     public let percentageCorrect: Int
     public let isHidden: Bool
     
+    public init(createdAt: Date,
+                subjectID: Int,
+                subjectType: SubjectType,
+                meaningCorrect: Int,
+                meaningIncorrect: Int,
+                meaningMaxStreak: Int,
+                meaningCurrentStreak: Int,
+                readingCorrect: Int,
+                readingIncorrect: Int,
+                readingMaxStreak: Int,
+                readingCurrentStreak: Int,
+                percentageCorrect: Int,
+                isHidden: Bool) {
+        self.createdAt = createdAt
+        self.subjectID = subjectID
+        self.subjectType = subjectType
+        self.meaningCorrect = meaningCorrect
+        self.meaningIncorrect = meaningIncorrect
+        self.meaningMaxStreak = meaningMaxStreak
+        self.meaningCurrentStreak = meaningCurrentStreak
+        self.readingCorrect = readingCorrect
+        self.readingIncorrect = readingIncorrect
+        self.readingMaxStreak = readingMaxStreak
+        self.readingCurrentStreak = readingCurrentStreak
+        self.percentageCorrect = percentageCorrect
+        self.isHidden = isHidden
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case subjectID = "subject_id"

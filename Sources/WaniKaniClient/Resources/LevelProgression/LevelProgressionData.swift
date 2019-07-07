@@ -9,6 +9,22 @@ public struct LevelProgressionData: Codable, Equatable {
     public let completedAt: Date?
     public let abandonedAt: Date?
     
+    public init(level: Int,
+                createdAt: Date,
+                unlockedAt: Date? = nil,
+                startedAt: Date? = nil,
+                passedAt: Date? = nil,
+                completedAt: Date? = nil,
+                abandonedAt: Date? = nil) {
+        self.level = level
+        self.createdAt = createdAt
+        self.unlockedAt = unlockedAt
+        self.startedAt = startedAt
+        self.passedAt = passedAt
+        self.completedAt = completedAt
+        self.abandonedAt = abandonedAt
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case level
         case createdAt = "created_at"
@@ -17,12 +33,5 @@ public struct LevelProgressionData: Codable, Equatable {
         case passedAt = "passed_at"
         case completedAt = "completed_at"
         case abandonedAt = "abandoned_at"
-    }
-}
-
-public extension LevelProgressionData {
-    var duration: TimeInterval? {
-        guard let startedAt = startedAt, let passedAt = passedAt else { return nil }
-        return passedAt.timeIntervalSince(startedAt)
     }
 }

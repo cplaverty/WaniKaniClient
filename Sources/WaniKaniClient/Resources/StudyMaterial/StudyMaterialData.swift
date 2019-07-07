@@ -9,6 +9,22 @@ public struct StudyMaterialData: Codable, Equatable {
     public let meaningSynonyms: [String]
     public let isHidden: Bool
     
+    public init(createdAt: Date,
+                subjectID: Int,
+                subjectType: SubjectType,
+                meaningNote: String? = nil,
+                readingNote: String? = nil,
+                meaningSynonyms: [String] = [],
+                isHidden: Bool) {
+        self.createdAt = createdAt
+        self.subjectID = subjectID
+        self.subjectType = subjectType
+        self.meaningNote = meaningNote
+        self.readingNote = readingNote
+        self.meaningSynonyms = meaningSynonyms
+        self.isHidden = isHidden
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case subjectID = "subject_id"
