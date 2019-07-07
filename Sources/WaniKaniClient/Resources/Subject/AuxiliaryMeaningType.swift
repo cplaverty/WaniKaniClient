@@ -1,4 +1,4 @@
-public enum AuxiliaryMeaningType: String, Codable {
+public enum AuxiliaryMeaningType: String, Codable, CaseIterable {
     case whitelist
     case blacklist
 }
