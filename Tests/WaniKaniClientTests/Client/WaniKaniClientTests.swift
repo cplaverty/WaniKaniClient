@@ -38,7 +38,7 @@ final class WaniKaniClientTests: XCTestCase {
         }
         
         wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.1)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
     }
     
     func testLoadCollectionRequestSinglePage() throws {
@@ -53,12 +53,7 @@ final class WaniKaniClientTests: XCTestCase {
             return (response, testData)
         }
         
-        let expected = ResourceCollection(object: "collection",
-                                          url: requestURL,
-                                          pages: ResourceCollectionPages(previousURL: nil, nextURL: nil, itemsPerPage: 1),
-                                          totalCount: 1,
-                                          dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
-                                          data: [TestResource(string: "content")])
+        let expected = [TestResource(string: "content")]
         
         let urlSession = makeURLSession()
         
@@ -73,12 +68,10 @@ final class WaniKaniClientTests: XCTestCase {
             case let .success(resource):
                 XCTAssertEqual(resource, expected)
             }
-            
-            return true
         }
         
         wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.1)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
     }
     
     func testLoadCollectionRequestMultiplePage() throws {
@@ -102,44 +95,68 @@ final class WaniKaniClientTests: XCTestCase {
             return (response, testData)
         }
         
-        let expecteds = [ResourceCollection(object: "collection",
-                                            url: requestURL,
-                                            pages: ResourceCollectionPages(previousURL: nil, nextURL: requestURLPage2, itemsPerPage: 1),
-                                            totalCount: 2,
-                                            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
-                                            data: [TestResource(string: "content")]),
-                         ResourceCollection(object: "collection",
-                                            url: requestURLPage2,
-                                            pages: ResourceCollectionPages(previousURL: requestURL, nextURL: nil, itemsPerPage: 1),
-                                            totalCount: 2,
-                                            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
-                                            data: [TestResource(string: "content2")])]
+        let expected = [TestResource(string: "content"),
+                        TestResource(string: "content2")]
         
         let urlSession = makeURLSession()
         
-        var expects = [expectation(description: "request page 1"),
-                       expectation(description: "request page 2")]
+        let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        var pageIndex = 0
         let progress = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)) { result in
-            let currentPageIndex = pageIndex
-            pageIndex += 1
-            
-            defer { expects[currentPageIndex].fulfill() }
+            defer { expect.fulfill() }
             
             switch result {
             case let .failure(error):
                 XCTFail("Request was not successful: \(error)")
             case let .success(resource):
-                XCTAssertEqual(resource, expecteds[currentPageIndex])
+                XCTAssertEqual(resource, expected)
             }
-            
-            return true
         }
         
-        wait(for: expects, timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.1)
-        XCTAssertEqual(pageIndex, 2)
+        wait(for: [expect], timeout: 3)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+    }
+    
+    func testLoadCollectionRequestMultiplePageErrorWithPartialResult() throws {
+        let requestURL = URL(string: "test://test-resources")!
+        let requestURLPage2 = URL(string: "test://test-resources?page=2")!
+        
+        MockURLProtocol.requestHandler[requestURL] = { request in
+            self.verifyHeadersForRequest(request)
+            
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            
+            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":3,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
+            return (response, testData)
+        }
+        MockURLProtocol.requestHandler[requestURLPage2] = { request in
+            self.verifyHeadersForRequest(request)
+            
+            throw URLError(.notConnectedToInternet)
+        }
+        
+        let expected = [TestResource(string: "content"),
+                        TestResource(string: "content2")]
+        
+        let urlSession = makeURLSession()
+        
+        let expect = expectation(description: "request")
+        let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
+        let progress = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)) { result in
+            defer { expect.fulfill() }
+            
+            switch result {
+            case let .failure(error as URLError):
+                XCTAssertEqual(error.code, .notConnectedToInternet)
+            case let .failure(error):
+                XCTFail("Request failed with unexpected error: \(error)")
+            case let .success(resource):
+                XCTFail("Request was not expected to be successful: \(resource)")
+            }
+        }
+        
+        wait(for: [expect], timeout: 3)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
     }
     
     func testUnauthorized() throws {
@@ -158,7 +175,7 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let _ = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
+        let progress = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
             defer { expect.fulfill() }
             
             switch result {
@@ -172,6 +189,7 @@ final class WaniKaniClientTests: XCTestCase {
         }
         
         wait(for: [expect], timeout: 3)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
     }
     
     func testNotFound() throws {
@@ -190,7 +208,7 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let _ = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
+        let progress = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
             defer { expect.fulfill() }
             
             switch result {
@@ -205,6 +223,7 @@ final class WaniKaniClientTests: XCTestCase {
         }
         
         wait(for: [expect], timeout: 3)
+        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
     }
     
     private func makeURLSession() -> URLSession {
@@ -225,6 +244,7 @@ final class WaniKaniClientTests: XCTestCase {
         ("testLoadRequest", testLoadRequest),
         ("testLoadCollectionRequestSinglePage", testLoadCollectionRequestSinglePage),
         ("testLoadCollectionRequestMultiplePage", testLoadCollectionRequestMultiplePage),
+        ("testLoadCollectionRequestMultiplePageErrorWithPartialResult", testLoadCollectionRequestMultiplePageErrorWithPartialResult),
         ("testUnauthorized", testUnauthorized),
         ("testNotFound", testNotFound),
     ]

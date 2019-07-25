@@ -17,8 +17,8 @@ public final class WaniKaniClient: ResourceRequestClient {
         urlSession.invalidateAndCancel()
     }
     
-    public func loadRequest<Request: ResourceRequest>(_ request: Request, completionHandler: @escaping (Result<Request.ResponseType, Error>) -> Void) -> Progress {
-        let requestTask = ResourceRequestTask(totalUnitCount: 1)
+    public func loadRequest<Request: ResourceRequest>(_ request: Request, completionHandler: @escaping (Result<Request.Resource, Error>) -> Void) -> Progress {
+        let requestTask = ResourceRequestTask<Request.Resource>(totalUnitCount: 1)
         
         let task = dataTask(with: request.requestURL) { (data, response, error) in
             do {
@@ -40,8 +40,8 @@ public final class WaniKaniClient: ResourceRequestClient {
         return requestTask.progress
     }
     
-    public func loadCollectionRequest<Request: ResourceCollectionRequest>(_ request: Request, completionHandler: @escaping (Result<Request.ResponseType, Error>) -> Bool) -> Progress {
-        let requestTask = ResourceRequestTask()
+    public func loadCollectionRequest<Request: ResourceCollectionRequest>(_ request: Request, completionHandler: @escaping (Result<[Request.Resource], Error>) -> Void) -> Progress {
+        let requestTask = ResourceRequestTask<Request.Resource>()
         
         let task = loadCollectionPage(with: request.requestURL, requestTask: requestTask, resourceDecoder: request.decodeResource(from:), completionHandler: completionHandler)
         requestTask.addAndResume(task)
@@ -49,18 +49,27 @@ public final class WaniKaniClient: ResourceRequestClient {
         return requestTask.progress
     }
     
-    private func loadCollectionPage<Resource>(with url: URL, requestTask: ResourceRequestTask, resourceDecoder: @escaping (Data) throws -> ResourceCollection<Resource>, completionHandler: @escaping (Result<ResourceCollection<Resource>, Error>) -> Bool) -> URLSessionDataTask {
+    private func loadCollectionPage<Resource>(with url: URL, requestTask: ResourceRequestTask<Resource>, resourceDecoder: @escaping (Data) throws -> ResourceCollection<Resource>, completionHandler: @escaping (Result<[Resource], Error>) -> Void) -> URLSessionDataTask {
         let task = dataTask(with: url) { (data, response, error) in
             let resources: ResourceCollection<Resource>
             do {
                 resources = try self.decodeResource(from: data, response: response, error: error, resourceDecoder: resourceDecoder)
+                
                 requestTask.progress.completedUnitCount += 1
+                if requestTask.resources.capacity < resources.totalCount {
+                    requestTask.resources.reserveCapacity(resources.totalCount)
+                }
+                requestTask.resources += resources.data
             } catch let error as URLError where error.code == .cancelled {
                 // Do not notify errors due to cancellation
-                requestTask.progress.completedUnitCount += 1
+                if requestTask.progress.totalUnitCount > 0 {
+                    requestTask.progress.completedUnitCount = requestTask.progress.totalUnitCount
+                }
                 return
             } catch {
-                requestTask.progress.completedUnitCount += 1
+                if requestTask.progress.totalUnitCount > 0 {
+                    requestTask.progress.completedUnitCount = requestTask.progress.totalUnitCount
+                }
                 _ = completionHandler(.failure(error))
                 return
             }
@@ -71,13 +80,8 @@ public final class WaniKaniClient: ResourceRequestClient {
             
             if let nextURL = resources.pages.nextURL {
                 requestTask.addAndResume(self.loadCollectionPage(with: nextURL, requestTask: requestTask, resourceDecoder: resourceDecoder, completionHandler: completionHandler))
-            }
-            
-            guard !requestTask.isCancelled else { return }
-            
-            let shouldGetNextPage = completionHandler(.success(resources))
-            if !shouldGetNextPage {
-                requestTask.cancel()
+            } else {
+                completionHandler(.success(requestTask.resources))
             }
         }
         
@@ -109,7 +113,7 @@ public final class WaniKaniClient: ResourceRequestClient {
             throw WaniKaniClientError.invalidAPIKey
         case 429:
             throw WaniKaniClientError.tooManyRequests
-        case 400..<600:
+        case 400 ..< 600:
             if let data = data, let error = try? JSONDecoder().decode(WaniKaniClientError.self, from: data) {
                 os_log("Error message received: %{public}@", type: .debug, error.localizedDescription)
                 throw error

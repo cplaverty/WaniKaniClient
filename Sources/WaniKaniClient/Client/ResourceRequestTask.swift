@@ -1,8 +1,9 @@
 import Foundation
 import os.log
 
-final class ResourceRequestTask {
+final class ResourceRequestTask<Resource> {
     public let progress: Progress
+    public var resources = [Resource]()
     
     private var tasks = [URLSessionTask]()
     
