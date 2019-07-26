@@ -2,10 +2,10 @@ import Foundation
 
 public struct GetAllStudyMaterialsRequest {
     public var isHidden: Bool?
-    public let ids: [Int]?
-    public let subjectIDs: [Int]?
-    public let subjectTypes: [SubjectType]?
-    public let updatedAfter: Date?
+    public var ids: [Int]?
+    public var subjectIDs: [Int]?
+    public var subjectTypes: [SubjectType]?
+    public var updatedAfter: Date?
     
     public init(isHidden: Bool? = nil,
                 ids: [Int]? = nil,

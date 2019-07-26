@@ -2,12 +2,12 @@ import Foundation
 
 public struct GetAllReviewStatisticsRequest {
     public var isHidden: Bool?
-    public let ids: [Int]?
-    public let percentagesGreaterThan: Int?
-    public let percentagesLessThan: Int?
-    public let subjectIDs: [Int]?
-    public let subjectTypes: [SubjectType]?
-    public let updatedAfter: Date?
+    public var ids: [Int]?
+    public var percentagesGreaterThan: Int?
+    public var percentagesLessThan: Int?
+    public var subjectIDs: [Int]?
+    public var subjectTypes: [SubjectType]?
+    public var updatedAfter: Date?
     
     public init(isHidden: Bool? = nil,
                 ids: [Int]? = nil,
