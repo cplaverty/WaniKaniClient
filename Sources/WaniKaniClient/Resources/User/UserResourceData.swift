@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserData: Codable, Equatable {
+public struct UserResourceData: Codable, Equatable {
     public let id: String
     public let username: String
     public let level: Int

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AssignmentData: Codable, Equatable {
+public struct AssignmentResourceData: Codable, Equatable {
     public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType

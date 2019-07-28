@@ -9,7 +9,7 @@ public struct GetSubjectRequest {
 }
 
 extension GetSubjectRequest: ResourceRequest {
-    public typealias Resource = Subject
+    public typealias Resource = SubjectResource
     
     public var requestURL: URL {
         return ResourceEndpoints.shared.subjects.appendingPathComponent("\(id)")

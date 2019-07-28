@@ -1,13 +1,13 @@
 import Foundation
 
-public struct Subject: Codable, Equatable {
+public struct SubjectResource: Codable, Equatable {
     public let id: Int
     public let objectType: ResourceObjectType
     public let url: URL
     public let dataUpdatedAt: Date
-    public let data: SubjectData
+    public let data: SubjectResourceData
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Radical) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: RadicalResource) {
         self.id = id
         self.objectType = .radical
         self.url = url
@@ -15,7 +15,7 @@ public struct Subject: Codable, Equatable {
         self.data = .radical(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Kanji) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: KanjiResource) {
         self.id = id
         self.objectType = .kanji
         self.url = url
@@ -23,7 +23,7 @@ public struct Subject: Codable, Equatable {
         self.data = .kanji(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: Vocabulary) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: VocabularyResource) {
         self.id = id
         self.objectType = .vocabulary
         self.url = url
@@ -66,14 +66,14 @@ public struct Subject: Codable, Equatable {
 }
 
 private extension KeyedDecodingContainerProtocol {
-    func decodeResource(of type: ResourceObjectType, forKey key: Key) throws -> SubjectData {
+    func decodeResource(of type: ResourceObjectType, forKey key: Key) throws -> SubjectResourceData {
         switch type {
         case .radical:
-            return .radical(try decode(Radical.self, forKey: key))
+            return .radical(try decode(RadicalResource.self, forKey: key))
         case .kanji:
-            return .kanji(try decode(Kanji.self, forKey: key))
+            return .kanji(try decode(KanjiResource.self, forKey: key))
         case .vocabulary:
-            return .vocabulary(try decode(Vocabulary.self, forKey: key))
+            return .vocabulary(try decode(VocabularyResource.self, forKey: key))
         default:
             throw DecodingError.dataCorruptedError(forKey: key, in: self, debugDescription: "Invalid subject type \(type)")
         }

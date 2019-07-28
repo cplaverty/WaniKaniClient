@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LevelProgressionData: Codable, Equatable {
+public struct LevelProgressionResourceData: Codable, Equatable {
     public let level: Int
     public let createdAt: Date
     public let unlockedAt: Date?

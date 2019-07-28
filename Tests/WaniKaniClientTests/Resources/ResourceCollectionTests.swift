@@ -11,47 +11,62 @@ final class ResourceCollectionTests: XCTestCase {
         
         let resource = try decoder.decode(ResourceCollection<TestResource>.self, from: testData)
         
-        let expected = ResourceCollection(object: "collection",
-                                          url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
-                                          pages: ResourceCollectionPages(previousURL: nil,
-                                                                         nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
-                                                                         itemsPerPage: 3),
-                                          totalCount: 10,
-                                          dataUpdatedAt: makeUTCDate(year: 2019, month: 6, day: 23, hour: 19, minute: 22, second: 33, microsecond: 18206),
-                                          data: [TestResource(string: "test1"),
-                                                 TestResource(string: "test2"),
-                                                 TestResource(string: "test3")])
+        let expected = ResourceCollection(
+            object: "collection",
+            url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
+            pages: ResourceCollectionPages(
+                previousURL: nil,
+                nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
+                itemsPerPage: 3),
+            totalCount: 10,
+            dataUpdatedAt: makeUTCDate(year: 2019, month: 6, day: 23, hour: 19, minute: 22, second: 33, microsecond: 18206),
+            data: [
+                TestResource(string: "test1"),
+                TestResource(string: "test2"),
+                TestResource(string: "test3")
+            ]
+        )
         
         XCTAssertEqual(resource, expected)
         XCTAssertEqual(4, resource.estimatedPageCount)
     }
     
     func testEstimatedPageCountExactMultiple() throws {
-        let resource = ResourceCollection(object: "collection",
-                                          url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
-                                          pages: ResourceCollectionPages(previousURL: nil,
-                                                                         nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
-                                                                         itemsPerPage: 3),
-                                          totalCount: 9,
-                                          dataUpdatedAt: Date(),
-                                          data: [TestResource(string: "test1"),
-                                                 TestResource(string: "test2"),
-                                                 TestResource(string: "test3")])
+        let resource = ResourceCollection(
+            object: "collection",
+            url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
+            pages: ResourceCollectionPages(
+                previousURL: nil,
+                nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
+                itemsPerPage: 3),
+            totalCount: 9,
+            dataUpdatedAt: Date(),
+            data: [
+                TestResource(string: "test1"),
+                TestResource(string: "test2"),
+                TestResource(string: "test3")
+            ]
+        )
         
         XCTAssertEqual(3, resource.estimatedPageCount)
     }
     
     func testEstimatedPageCountSinglePage() throws {
-        let resource = ResourceCollection(object: "collection",
-                                          url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
-                                          pages: ResourceCollectionPages(previousURL: nil,
-                                                                         nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
-                                                                         itemsPerPage: 30),
-                                          totalCount: 3,
-                                          dataUpdatedAt: Date(),
-                                          data: [TestResource(string: "test1"),
-                                                 TestResource(string: "test2"),
-                                                 TestResource(string: "test3")])
+        let resource = ResourceCollection(
+            object: "collection",
+            url: URL(string: "https://api.wanikani.com/v2/test_resource")!,
+            pages: ResourceCollectionPages(
+                previousURL: nil,
+                nextURL: nil,
+                itemsPerPage: 30),
+            totalCount: 3,
+            dataUpdatedAt: Date(),
+            data: [
+                TestResource(string: "test1"),
+                TestResource(string: "test2"),
+                TestResource(string: "test3")
+            ]
+        )
         
         XCTAssertEqual(1, resource.estimatedPageCount)
     }

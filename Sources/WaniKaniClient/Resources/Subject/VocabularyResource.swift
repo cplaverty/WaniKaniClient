@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Vocabulary: SubjectTypeData, Codable, Equatable {
+public struct VocabularyResource: SubjectTypeData, Codable, Equatable {
     public let createdAt: Date
     public let level: Int
     public let slug: String

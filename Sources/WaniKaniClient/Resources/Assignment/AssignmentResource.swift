@@ -1,18 +1,18 @@
 import Foundation
 
-public struct LevelProgression: Codable, Equatable {
+public struct AssignmentResource: Codable, Equatable {
     public let id: Int
     public let objectType: ResourceObjectType
     public let url: URL
     public let dataUpdatedAt: Date
-    public let data: LevelProgressionData
+    public let data: AssignmentResourceData
     
     public init(id: Int,
                 url: URL,
                 dataUpdatedAt: Date,
-                data: LevelProgressionData) {
+                data: AssignmentResourceData) {
         self.id = id
-        self.objectType = .levelProgression
+        self.objectType = .assignment
         self.url = url
         self.dataUpdatedAt = dataUpdatedAt
         self.data = data

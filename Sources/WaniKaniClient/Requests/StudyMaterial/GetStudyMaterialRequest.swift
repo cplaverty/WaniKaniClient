@@ -9,7 +9,7 @@ public struct GetStudyMaterialRequest {
 }
 
 extension GetStudyMaterialRequest: ResourceRequest {
-    public typealias Resource = StudyMaterial
+    public typealias Resource = StudyMaterialResource
     
     public var requestURL: URL {
         return ResourceEndpoints.shared.studyMaterials.appendingPathComponent("\(id)")

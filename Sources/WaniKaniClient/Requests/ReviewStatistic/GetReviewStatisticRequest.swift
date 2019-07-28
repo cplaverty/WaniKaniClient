@@ -9,7 +9,7 @@ public struct GetReviewStatisticRequest {
 }
 
 extension GetReviewStatisticRequest: ResourceRequest {
-    public typealias Resource = ReviewStatistic
+    public typealias Resource = ReviewStatisticResource
     
     public var requestURL: URL {
         return ResourceEndpoints.shared.reviewStatistics.appendingPathComponent("\(id)")

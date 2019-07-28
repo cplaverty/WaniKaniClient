@@ -24,7 +24,7 @@ public struct GetAllSubjectsRequest {
 }
 
 extension GetAllSubjectsRequest: ResourceCollectionRequest {
-    public typealias Resource = Subject
+    public typealias Resource = SubjectResource
     
     public var requestURL: URL {
         let url = ResourceEndpoints.shared.subjects

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ResetData: Codable, Equatable {
+public struct ResetResourceData: Codable, Equatable {
     public let createdAt: Date
     public let originalLevel: Int
     public let targetLevel: Int

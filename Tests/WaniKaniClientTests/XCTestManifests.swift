@@ -25,17 +25,17 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(GetUserRequestTests.allTests),
         
         // Resources
-        testCase(AssignmentTests.allTests),
-        testCase(KanjiTests.allTests),
-        testCase(LevelProgressionTests.allTests),
-        testCase(RadicalTests.allTests),
-        testCase(ResetTests.allTests),
+        testCase(AssignmentResourceTests.allTests),
+        testCase(KanjiResourceTests.allTests),
+        testCase(LevelProgressionResourceTests.allTests),
+        testCase(RadicalResourceTests.allTests),
+        testCase(ResetResourceTests.allTests),
         testCase(ResourceCollectionTests.allTests),
-        testCase(ReviewStatisticTests.allTests),
-        testCase(ReviewTests.allTests),
-        testCase(StudyMaterialTests.allTests),
-        testCase(UserTests.allTests),
-        testCase(VocabularyTests.allTests),
+        testCase(ReviewResourceTests.allTests),
+        testCase(ReviewStatisticResourceTests.allTests),
+        testCase(StudyMaterialResourceTests.allTests),
+        testCase(UserResourceTests.allTests),
+        testCase(VocabularyResourceTests.allTests),
     ]
 }
 #endif

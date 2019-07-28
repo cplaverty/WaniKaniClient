@@ -9,7 +9,7 @@ public struct GetResetRequest {
 }
 
 extension GetResetRequest: ResourceRequest {
-    public typealias Resource = Reset
+    public typealias Resource = ResetResource
     
     public var requestURL: URL {
         return ResourceEndpoints.shared.resets.appendingPathComponent("\(id)")

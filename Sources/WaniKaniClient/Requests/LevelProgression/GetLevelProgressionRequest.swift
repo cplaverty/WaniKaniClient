@@ -9,7 +9,7 @@ public struct GetLevelProgressionRequest {
 }
 
 extension GetLevelProgressionRequest: ResourceRequest {
-    public typealias Resource = LevelProgression
+    public typealias Resource = LevelProgressionResource
     
     public var requestURL: URL {
         return ResourceEndpoints.shared.levelProgressions.appendingPathComponent("\(id)")

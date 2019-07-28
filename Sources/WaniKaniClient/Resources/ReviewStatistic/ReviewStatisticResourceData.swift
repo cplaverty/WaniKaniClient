@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ReviewStatisticData: Codable, Equatable {
+public struct ReviewStatisticResourceData: Codable, Equatable {
     public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType

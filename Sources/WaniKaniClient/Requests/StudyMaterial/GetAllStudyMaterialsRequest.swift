@@ -21,7 +21,7 @@ public struct GetAllStudyMaterialsRequest {
 }
 
 extension GetAllStudyMaterialsRequest: ResourceCollectionRequest {
-    public typealias Resource = StudyMaterial
+    public typealias Resource = StudyMaterialResource
     
     public var requestURL: URL {
         let url = ResourceEndpoints.shared.studyMaterials
