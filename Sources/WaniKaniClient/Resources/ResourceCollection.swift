@@ -5,14 +5,14 @@ public struct ResourceCollection<Resource: Codable>: Codable {
     public let url: URL
     public let pages: ResourceCollectionPages
     public let totalCount: Int
-    public let dataUpdatedAt: Date
+    public let dataUpdatedAt: Date?
     public let data: [Resource]
     
     public init(object: String,
                 url: URL,
                 pages: ResourceCollectionPages,
                 totalCount: Int,
-                dataUpdatedAt: Date,
+                dataUpdatedAt: Date?,
                 data: [Resource]) {
         self.object = object
         self.url = url
