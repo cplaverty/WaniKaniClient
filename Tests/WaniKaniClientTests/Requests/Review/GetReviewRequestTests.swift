@@ -19,9 +19,4 @@ final class GetReviewRequestTests: XCTestCase {
         
         XCTAssertEqual(request.requestURL, expected)
     }
-    
-    static var allTests = [
-        ("testSmallID", testSmallID),
-        ("testLargeID", testLargeID),
-    ]
 }

@@ -26,8 +26,4 @@ final class StudyMaterialResourceTests: XCTestCase {
         
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

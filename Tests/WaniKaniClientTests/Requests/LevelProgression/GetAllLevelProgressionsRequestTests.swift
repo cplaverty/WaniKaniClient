@@ -28,10 +28,4 @@ final class GetAllLevelProgressionsRequestTests: XCTestCase {
         
         XCTAssertEqual(request.requestURL, expected)
     }
-    
-    static var allTests = [
-        ("testNoParams", testNoParams),
-        ("testIDs", testIDs),
-        ("testUpdatedAfter", testUpdatedAfter),
-    ]
 }

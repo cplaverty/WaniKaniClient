@@ -40,8 +40,4 @@ final class KanjiResourceTests: XCTestCase {
                 lessonPosition: 26))
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

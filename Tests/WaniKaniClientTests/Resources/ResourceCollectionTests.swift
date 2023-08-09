@@ -70,10 +70,4 @@ final class ResourceCollectionTests: XCTestCase {
         
         XCTAssertEqual(1, resource.estimatedPageCount)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-        ("testEstimatedPageCountExactMultiple", testEstimatedPageCountExactMultiple),
-        ("testEstimatedPageCountSinglePage", testEstimatedPageCountSinglePage),
-    ]
 }

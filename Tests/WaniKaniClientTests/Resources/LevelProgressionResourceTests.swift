@@ -26,8 +26,4 @@ final class LevelProgressionResourceTests: XCTestCase {
         
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

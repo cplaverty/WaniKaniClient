@@ -52,13 +52,4 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         XCTAssertEqual(request.requestURL, expected)
     }
-    
-    static var allTests = [
-        ("testNoParams", testNoParams),
-        ("testHidden", testHidden),
-        ("testIDs", testIDs),
-        ("testSubjectIDs", testSubjectIDs),
-        ("testSubjectTypes", testSubjectTypes),
-        ("testUpdatedAfter", testUpdatedAfter),
-    ]
 }

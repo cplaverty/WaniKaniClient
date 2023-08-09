@@ -35,10 +35,4 @@ final class ResourceDecoderTests: XCTestCase {
         
         XCTAssertThrowsError(try decoder.decode(TestResource.self, from: testData))
     }
-    
-    static var allTests = [
-        ("testDateNoFractionalSeconds", testDateNoFractionalSeconds),
-        ("testDateFractionalSeconds", testDateFractionalSeconds),
-        ("testInvalidDate", testInvalidDate),
-    ]
 }

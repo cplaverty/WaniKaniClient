@@ -23,8 +23,4 @@ final class ResetResourceTests: XCTestCase {
         
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

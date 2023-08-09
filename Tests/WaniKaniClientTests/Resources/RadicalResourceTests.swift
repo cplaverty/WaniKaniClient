@@ -68,8 +68,4 @@ final class RadicalResourceTests: XCTestCase {
         
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

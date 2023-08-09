@@ -12,8 +12,4 @@ final class GetUserRequestTests: XCTestCase {
         
         XCTAssertEqual(url, expected)
     }
-    
-    static var allTests = [
-        ("testNoParams", testNoParams),
-    ]
 }

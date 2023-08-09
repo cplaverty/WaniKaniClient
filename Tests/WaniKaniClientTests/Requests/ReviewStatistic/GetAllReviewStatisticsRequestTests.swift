@@ -68,15 +68,4 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         XCTAssertEqual(request.requestURL, expected)
     }
-    
-    static var allTests = [
-        ("testNoParams", testNoParams),
-        ("testHidden", testHidden),
-        ("testIDs", testIDs),
-        ("testPercentagesGreaterThan", testPercentagesGreaterThan),
-        ("testPercentagesLessThan", testPercentagesLessThan),
-        ("testSubjectIDs", testSubjectIDs),
-        ("testSubjectTypes", testSubjectTypes),
-        ("testUpdatedAfter", testUpdatedAfter),
-    ]
 }

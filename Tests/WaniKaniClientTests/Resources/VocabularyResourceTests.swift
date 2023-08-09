@@ -56,8 +56,4 @@ final class VocabularyResourceTests: XCTestCase {
         
         XCTAssertEqual(resource, expected)
     }
-    
-    static var allTests = [
-        ("testDecode", testDecode),
-    ]
 }

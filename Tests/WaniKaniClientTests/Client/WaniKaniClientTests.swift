@@ -135,9 +135,6 @@ final class WaniKaniClientTests: XCTestCase {
             throw URLError(.notConnectedToInternet)
         }
         
-        let expected = [TestResource(string: "content"),
-                        TestResource(string: "content2")]
-        
         let urlSession = makeURLSession()
         
         let expect = expectation(description: "request")
@@ -239,13 +236,4 @@ final class WaniKaniClientTests: XCTestCase {
         let wanikaniRevisionHeaderValue = request.value(forHTTPHeaderField: "Wanikani-Revision")
         XCTAssertEqual(wanikaniRevisionHeaderValue, WaniKaniClient.apiRevision, "Unexpected Wanikani-Revision header")
     }
-    
-    static var allTests = [
-        ("testLoadRequest", testLoadRequest),
-        ("testLoadCollectionRequestSinglePage", testLoadCollectionRequestSinglePage),
-        ("testLoadCollectionRequestMultiplePage", testLoadCollectionRequestMultiplePage),
-        ("testLoadCollectionRequestMultiplePageErrorWithPartialResult", testLoadCollectionRequestMultiplePageErrorWithPartialResult),
-        ("testUnauthorized", testUnauthorized),
-        ("testNotFound", testNotFound),
-    ]
 }

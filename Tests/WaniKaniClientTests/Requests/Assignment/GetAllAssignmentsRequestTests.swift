@@ -150,25 +150,4 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         XCTAssertEqual(request.requestURL, expected)
     }
-    
-    static var allTests = [
-        ("testNoParams", testNoParams),
-        ("testAvailableAfter", testAvailableAfter),
-        ("testAvailableBefore", testAvailableBefore),
-        ("testBurned", testBurned),
-        ("testHidden", testHidden),
-        ("testIDs", testIDs),
-        ("testImmediatelyAvailableForLessons", testImmediatelyAvailableForLessons),
-        ("testImmediatelyAvailableForReview", testImmediatelyAvailableForReview),
-        ("testInReview", testInReview),
-        ("testLevels", testLevels),
-        ("testPassed", testPassed),
-        ("testResurrected", testResurrected),
-        ("testSRSStages", testSRSStages),
-        ("testStarted", testStarted),
-        ("testSubjectIDs", testSubjectIDs),
-        ("testSubjectTypes", testSubjectTypes),
-        ("testUnlocked", testUnlocked),
-        ("testUpdatedAfter", testUpdatedAfter),
-    ]
 }
