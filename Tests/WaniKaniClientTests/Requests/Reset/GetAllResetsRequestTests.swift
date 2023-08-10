@@ -22,7 +22,7 @@ final class GetAllResetsRequestTests: XCTestCase {
     
     func testUpdatedAfter() {
         // DateFormatter only has millisecond precision
-        let expected = URL(string: "resets?updated_after=2019-03-01T18:10:34.873000Z", relativeTo: baseURL)!.absoluteURL
+        let expected = URL(string: "resets?updated_after=2019-03-01T18:10:34.873Z", relativeTo: baseURL)!.absoluteURL
         
         let request = GetAllResetsRequest(updatedAfter: makeUTCDate(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         

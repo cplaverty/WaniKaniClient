@@ -19,11 +19,7 @@ private extension JSONDecoder.DateDecodingStrategy {
         let container = try decoder.singleValueContainer()
         let string = try container.decode(String.self)
         
-        if let date = DateFormatter.iso8601.date(from: string) {
-            return date
-        }
-        
-        if let date = DateFormatter.iso8601WithoutFractionalSeconds.date(from: string) {
+        if let date = waniKaniDateFormatter.date(from: string) {
             return date
         }
         

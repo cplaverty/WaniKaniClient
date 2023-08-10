@@ -10,7 +10,7 @@ extension RangeReplaceableCollection where Element == URLQueryItem {
     mutating func appendItemIfSet(name: String, value: Date?) {
         guard let value = value else { return }
         
-        append(URLQueryItem(name: name, value: DateFormatter.iso8601.string(from: value)))
+        append(URLQueryItem(name: name, value: waniKaniDateFormatter.string(from: value)))
     }
     
     mutating func appendItemsIfSet(name: String, values: [String]?) {
