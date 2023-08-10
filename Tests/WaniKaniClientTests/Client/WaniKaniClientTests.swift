@@ -8,7 +8,7 @@ final class WaniKaniClientTests: XCTestCase {
         MockURLProtocol.requestHandler.removeAll()
     }
     
-    func testLoadRequest() throws {
+    func testLoadRequest() async throws {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -26,22 +26,17 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case let .failure(error):
-                XCTFail("Request was not successful: \(error)")
-            case let .success(resource):
-                XCTAssertEqual(resource, expected)
-            }
+            let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+            XCTAssertEqual(resource, expected)
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestSinglePage() throws {
+    func testLoadCollectionRequestSinglePage() async throws {
         let requestURL = URL(string: "test://test-resources")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -59,22 +54,17 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case let .failure(error):
-                XCTFail("Request was not successful: \(error)")
-            case let .success(resource):
-                XCTAssertEqual(resource, expected)
-            }
+            let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+            XCTAssertEqual(resource, expected)
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestMultiplePage() throws {
+    func testLoadCollectionRequestMultiplePage() async throws {
         let requestURL = URL(string: "test://test-resources")!
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
@@ -102,22 +92,17 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case let .failure(error):
-                XCTFail("Request was not successful: \(error)")
-            case let .success(resource):
-                XCTAssertEqual(resource, expected)
-            }
+            let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+            XCTAssertEqual(resource, expected)
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestMultiplePageErrorWithPartialResult() throws {
+    func testLoadCollectionRequestMultiplePageErrorWithPartialResult() async throws {
         let requestURL = URL(string: "test://test-resources")!
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
@@ -139,24 +124,23 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case let .failure(error as URLError):
+            do {
+                let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+                XCTFail("Request was not expected to succeed but got resource: \(resource)")
+            } catch let error as URLError {
                 XCTAssertEqual(error.code, .notConnectedToInternet)
-            case let .failure(error):
-                XCTFail("Request failed with unexpected error: \(error)")
-            case let .success(resource):
-                XCTFail("Request was not expected to be successful: \(resource)")
+            } catch {
+                XCTFail("Request failed with an unexpected error: \(error)")
             }
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testUnauthorized() throws {
+    func testUnauthorized() async throws {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -172,24 +156,23 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case .failure(WaniKaniClientError.invalidAPIKey):
-                break
-            case let .failure(error):
+            do {
+                let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+                XCTFail("Request was not expected to succeed but got resource: \(resource)")
+            } catch WaniKaniClientError.invalidAPIKey {
+                // Expected error
+            } catch {
                 XCTFail("Request failed with an unexpected error: \(error)")
-            case let .success(resource):
-                XCTFail("Request was not expected to succeed: \(resource)")
             }
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testNotFound() throws {
+    func testNotFound() async throws {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -205,22 +188,21 @@ final class WaniKaniClientTests: XCTestCase {
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
-        let progress = client.loadRequest(TestRequest(requestURL: requestURL)) { result in
+        Task {
             defer { expect.fulfill() }
             
-            switch result {
-            case let .failure(WaniKaniClientError.apiError(error: error, code: code)):
+            do {
+                let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+                XCTFail("Request was not expected to succeed but got resource: \(resource)")
+            } catch WaniKaniClientError.apiError(let error, let code) {
                 XCTAssertEqual(error, "Not found", "Unexpected error message")
                 XCTAssertEqual(code, 404, "Unexpected error code")
-            case let .failure(error):
+            } catch {
                 XCTFail("Request failed with an unexpected error: \(error)")
-            case let .success(resource):
-                XCTFail("Request was not expected to succeed: \(resource)")
             }
         }
         
-        wait(for: [expect], timeout: 3)
-        XCTAssertEqual(progress.fractionCompleted, 1.0, accuracy: 0.001)
+        await fulfillment(of: [expect], timeout: 3)
     }
     
     private func makeURLSession() -> URLSession {
@@ -231,7 +213,7 @@ final class WaniKaniClientTests: XCTestCase {
     
     private func verifyHeadersForRequest(_ request: URLRequest) {
         let authorizationHeaderValue = request.value(forHTTPHeaderField: "Authorization")
-        XCTAssertEqual(authorizationHeaderValue, "Bearer \(self.apiKey)", "Unexpected Authorization header")
+        XCTAssertEqual(authorizationHeaderValue, "Bearer \(apiKey)", "Unexpected Authorization header")
         
         let wanikaniRevisionHeaderValue = request.value(forHTTPHeaderField: "Wanikani-Revision")
         XCTAssertEqual(wanikaniRevisionHeaderValue, WaniKaniClient.apiRevision, "Unexpected Wanikani-Revision header")

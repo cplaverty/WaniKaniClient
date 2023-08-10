@@ -33,10 +33,3 @@ public struct ResourceCollection<Resource: Codable>: Codable {
 }
 
 extension ResourceCollection: Equatable where Resource: Equatable {}
-
-public extension ResourceCollection {
-    var estimatedPageCount: Int {
-        let (quotient, remainder) = totalCount.quotientAndRemainder(dividingBy: pages.itemsPerPage)
-        return remainder > 0 ? quotient + 1 : quotient
-    }
-}
