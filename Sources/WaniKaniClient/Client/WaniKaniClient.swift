@@ -89,7 +89,7 @@ public final class WaniKaniClient: ResourceRequestClient {
     }
     
     private func decodeResource<Resource>(from data: Data?, response: URLResponse?, error: Error?, resourceDecoder: (Data) throws -> Resource) throws -> Resource {
-        if let error = error {
+        if let error {
             throw error
         }
         
@@ -97,7 +97,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         let httpStatusCode = httpResponse?.statusCode ?? 200
         let httpStatusCodeDescription = HTTPURLResponse.localizedString(forStatusCode: httpStatusCode)
         
-        if let data = data {
+        if let data {
             os_log("Response: %{public}@ (%d), %{iec-bytes}d received", type: .debug, httpStatusCodeDescription, httpStatusCode, data.count)
         } else {
             os_log("Response: %{public}@ (%d) <no data>", type: .debug, httpStatusCodeDescription, httpStatusCode)
@@ -105,7 +105,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         
         switch httpStatusCode {
         case 200:
-            guard let data = data else {
+            guard let data else {
                 throw WaniKaniClientError.noContent
             }
             return try resourceDecoder(data)
@@ -114,7 +114,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         case 429:
             throw WaniKaniClientError.tooManyRequests
         case 400 ..< 600:
-            if let data = data, let error = try? JSONDecoder().decode(WaniKaniClientError.self, from: data) {
+            if let data, let error = try? JSONDecoder().decode(WaniKaniClientError.self, from: data) {
                 os_log("Error message received: %{public}@", type: .debug, error.localizedDescription)
                 throw error
             }
