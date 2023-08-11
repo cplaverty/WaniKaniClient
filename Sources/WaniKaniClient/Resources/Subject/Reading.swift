@@ -1,9 +1,9 @@
 public struct Reading: Codable, Equatable {
     /// Kanji only
-    public let type: ReadingType?
-    public let reading: String
-    public let isPrimary: Bool
-    public let isAcceptedAnswer: Bool
+    public var type: ReadingType?
+    public var reading: String
+    public var isPrimary: Bool
+    public var isAcceptedAnswer: Bool
     
     public init(type: ReadingType? = nil,
                 reading: String,

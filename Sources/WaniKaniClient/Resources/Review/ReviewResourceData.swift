@@ -1,15 +1,15 @@
 import Foundation
 
 public struct ReviewResourceData: Codable, Equatable {
-    public let createdAt: Date
-    public let assignmentID: Int
-    public let subjectID: Int
-    public let startingSRSStage: Int
-    public let startingSRSStageName: String
-    public let endingSRSStage: Int
-    public let endingSRSStageName: String
-    public let incorrectMeaningAnswers: Int
-    public let incorrectReadingAnswers: Int
+    public var createdAt: Date
+    public var assignmentID: Int
+    public var subjectID: Int
+    public var startingSRSStage: Int
+    public var startingSRSStageName: String
+    public var endingSRSStage: Int
+    public var endingSRSStageName: String
+    public var incorrectMeaningAnswers: Int
+    public var incorrectReadingAnswers: Int
     
     public init(createdAt: Date,
                 assignmentID: Int,

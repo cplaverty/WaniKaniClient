@@ -1,7 +1,7 @@
 public struct Meaning: Codable, Equatable {
-    public let meaning: String
-    public let isPrimary: Bool
-    public let isAcceptedAnswer: Bool
+    public var meaning: String
+    public var isPrimary: Bool
+    public var isAcceptedAnswer: Bool
     
     public init(meaning: String,
                 isPrimary: Bool,

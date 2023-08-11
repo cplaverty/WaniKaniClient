@@ -1,13 +1,13 @@
 import Foundation
 
 public struct StudyMaterialResourceData: Codable, Equatable {
-    public let createdAt: Date
-    public let subjectID: Int
-    public let subjectType: SubjectType
-    public let meaningNote: String?
-    public let readingNote: String?
-    public let meaningSynonyms: [String]
-    public let isHidden: Bool
+    public var createdAt: Date
+    public var subjectID: Int
+    public var subjectType: SubjectType
+    public var meaningNote: String?
+    public var readingNote: String?
+    public var meaningSynonyms: [String]
+    public var isHidden: Bool
     
     public init(createdAt: Date,
                 subjectID: Int,

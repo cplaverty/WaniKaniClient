@@ -1,11 +1,11 @@
 import Foundation
 
 public struct SubjectResource: Codable, Equatable {
-    public let id: Int
-    public let objectType: ResourceObjectType
-    public let url: URL
-    public let dataUpdatedAt: Date
-    public let data: SubjectResourceData
+    public var id: Int
+    public private(set) var objectType: ResourceObjectType
+    public var url: URL
+    public var dataUpdatedAt: Date
+    public private(set) var data: SubjectResourceData
     
     public init(id: Int, url: URL, dataUpdatedAt: Date, data: RadicalResource) {
         self.id = id

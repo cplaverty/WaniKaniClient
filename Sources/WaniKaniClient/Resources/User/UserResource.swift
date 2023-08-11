@@ -1,15 +1,14 @@
 import Foundation
 
 public struct UserResource: Codable, Equatable {
-    public let objectType: ResourceObjectType
-    public let url: URL
-    public let dataUpdatedAt: Date
-    public let data: UserResourceData
+    public let objectType: ResourceObjectType = .user
+    public var url: URL
+    public var dataUpdatedAt: Date
+    public var data: UserResourceData
     
     public init(url: URL,
                 dataUpdatedAt: Date,
                 data: UserResourceData) {
-        self.objectType = .user
         self.url = url
         self.dataUpdatedAt = dataUpdatedAt
         self.data = data

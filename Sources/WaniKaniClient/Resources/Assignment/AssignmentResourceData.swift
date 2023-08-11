@@ -1,20 +1,20 @@
 import Foundation
 
 public struct AssignmentResourceData: Codable, Equatable {
-    public let createdAt: Date
-    public let subjectID: Int
-    public let subjectType: SubjectType
-    public let srsStage: Int
-    public let srsStageName: String
-    public let unlockedAt: Date?
-    public let startedAt: Date?
-    public let passedAt: Date?
-    public let burnedAt: Date?
-    public let availableAt: Date?
-    public let resurrectedAt: Date?
-    public let isPassed: Bool
-    public let isResurrected: Bool
-    public let isHidden: Bool
+    public var createdAt: Date
+    public var subjectID: Int
+    public var subjectType: SubjectType
+    public var srsStage: Int
+    public var srsStageName: String
+    public var unlockedAt: Date?
+    public var startedAt: Date?
+    public var passedAt: Date?
+    public var burnedAt: Date?
+    public var availableAt: Date?
+    public var resurrectedAt: Date?
+    public var isPassed: Bool
+    public var isResurrected: Bool
+    public var isHidden: Bool
     
     public init(createdAt: Date,
                 subjectID: Int,

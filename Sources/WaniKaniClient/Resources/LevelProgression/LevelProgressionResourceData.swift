@@ -1,13 +1,13 @@
 import Foundation
 
 public struct LevelProgressionResourceData: Codable, Equatable {
-    public let level: Int
-    public let createdAt: Date
-    public let unlockedAt: Date?
-    public let startedAt: Date?
-    public let passedAt: Date?
-    public let completedAt: Date?
-    public let abandonedAt: Date?
+    public var level: Int
+    public var createdAt: Date
+    public var unlockedAt: Date?
+    public var startedAt: Date?
+    public var passedAt: Date?
+    public var completedAt: Date?
+    public var abandonedAt: Date?
     
     public init(level: Int,
                 createdAt: Date,

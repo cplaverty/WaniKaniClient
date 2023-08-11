@@ -1,18 +1,18 @@
 import Foundation
 
 public struct RadicalResource: SubjectTypeData, Codable, Equatable {
-    public let createdAt: Date
-    public let level: Int
-    public let slug: String
-    public let hiddenAt: Date?
-    public let documentURL: URL
-    public let characters: String?
-    public let characterImages: [RadicalCharacterImage]
-    public let meanings: [Meaning]
-    public let auxiliaryMeanings: [AuxiliaryMeaning]
-    public let amalgamationSubjectIDs: [Int]
-    public let meaningMnemonic: String
-    public let lessonPosition: Int
+    public var createdAt: Date
+    public var level: Int
+    public var slug: String
+    public var hiddenAt: Date?
+    public var documentURL: URL
+    public var characters: String?
+    public var characterImages: [RadicalCharacterImage]
+    public var meanings: [Meaning]
+    public var auxiliaryMeanings: [AuxiliaryMeaning]
+    public var amalgamationSubjectIDs: [Int]
+    public var meaningMnemonic: String
+    public var lessonPosition: Int
     
     public init(createdAt: Date,
                 level: Int,

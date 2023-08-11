@@ -1,6 +1,6 @@
 public struct AuxiliaryMeaning: Codable, Equatable {
-    public let type: AuxiliaryMeaningType
-    public let meaning: String
+    public var type: AuxiliaryMeaningType
+    public var meaning: String
     
     public init(type: AuxiliaryMeaningType,
                 meaning: String) {

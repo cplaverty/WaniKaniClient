@@ -1,9 +1,9 @@
 import Foundation
 
 public struct RadicalCharacterImage: Codable, Equatable {
-    public let url: URL
-    public let metadata: RadicalCharacterImageMetadata
-    public let contentType: String
+    public var url: URL
+    public var metadata: RadicalCharacterImageMetadata
+    public var contentType: String
     
     public init(url: URL,
                 metadata: RadicalCharacterImageMetadata,

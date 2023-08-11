@@ -1,22 +1,22 @@
 import Foundation
 
 public struct VocabularyResource: SubjectTypeData, Codable, Equatable {
-    public let createdAt: Date
-    public let level: Int
-    public let slug: String
-    public let hiddenAt: Date?
-    public let documentURL: URL
-    public let characters: String
-    public let meanings: [Meaning]
-    public let auxiliaryMeanings: [AuxiliaryMeaning]
-    public let readings: [Reading]
-    public let partsOfSpeech: [String]
-    public let componentSubjectIDs: [Int]
-    public let meaningMnemonic: String
-    public let readingMnemonic: String
-    public let contextSentences: [VocabularyContextSentence]
-    public let pronunciationAudios: [VocabularyPronunciationAudio]
-    public let lessonPosition: Int
+    public var createdAt: Date
+    public var level: Int
+    public var slug: String
+    public var hiddenAt: Date?
+    public var documentURL: URL
+    public var characters: String
+    public var meanings: [Meaning]
+    public var auxiliaryMeanings: [AuxiliaryMeaning]
+    public var readings: [Reading]
+    public var partsOfSpeech: [String]
+    public var componentSubjectIDs: [Int]
+    public var meaningMnemonic: String
+    public var readingMnemonic: String
+    public var contextSentences: [VocabularyContextSentence]
+    public var pronunciationAudios: [VocabularyPronunciationAudio]
+    public var lessonPosition: Int
     
     public init(createdAt: Date,
                 level: Int,

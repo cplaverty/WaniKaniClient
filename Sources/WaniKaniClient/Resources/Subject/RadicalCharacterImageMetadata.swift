@@ -1,8 +1,8 @@
 public struct RadicalCharacterImageMetadata: Codable, Equatable {
-    public let color: String?
-    public let dimensions: String?
-    public let styleName: String?
-    public let inlineStyles: Bool?
+    public var color: String?
+    public var dimensions: String?
+    public var styleName: String?
+    public var inlineStyles: Bool?
     
     public init(color: String? = nil,
                 dimensions: String? = nil,

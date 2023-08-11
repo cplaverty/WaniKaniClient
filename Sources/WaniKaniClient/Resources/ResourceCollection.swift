@@ -1,12 +1,12 @@
 import Foundation
 
 public struct ResourceCollection<Resource: Codable>: Codable {
-    public let object: String
-    public let url: URL
-    public let pages: ResourceCollectionPages
-    public let totalCount: Int
-    public let dataUpdatedAt: Date?
-    public let data: [Resource]
+    public var object: String
+    public var url: URL
+    public var pages: ResourceCollectionPages
+    public var totalCount: Int
+    public var dataUpdatedAt: Date?
+    public var data: [Resource]
     
     public init(object: String,
                 url: URL,

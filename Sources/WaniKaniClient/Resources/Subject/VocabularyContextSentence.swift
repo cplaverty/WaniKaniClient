@@ -1,6 +1,6 @@
 public struct VocabularyContextSentence: Codable, Equatable {
-    public let english: String
-    public let japanese: String
+    public var english: String
+    public var japanese: String
     
     public init(english: String,
                 japanese: String) {

@@ -1,10 +1,10 @@
 import Foundation
 
 public struct ResetResourceData: Codable, Equatable {
-    public let createdAt: Date
-    public let originalLevel: Int
-    public let targetLevel: Int
-    public let confirmedAt: Date?
+    public var createdAt: Date
+    public var originalLevel: Int
+    public var targetLevel: Int
+    public var confirmedAt: Date?
     
     public init(createdAt: Date,
                 originalLevel: Int,

@@ -1,18 +1,17 @@
 import Foundation
 
 public struct ReviewStatisticResource: Codable, Equatable {
-    public let id: Int
-    public let objectType: ResourceObjectType
-    public let url: URL
-    public let dataUpdatedAt: Date
-    public let data: ReviewStatisticResourceData
+    public var id: Int
+    public let objectType: ResourceObjectType = .reviewStatistic
+    public var url: URL
+    public var dataUpdatedAt: Date
+    public var data: ReviewStatisticResourceData
     
     public init(id: Int,
                 url: URL,
                 dataUpdatedAt: Date,
                 data: ReviewStatisticResourceData) {
         self.id = id
-        self.objectType = .reviewStatistic
         self.url = url
         self.dataUpdatedAt = dataUpdatedAt
         self.data = data

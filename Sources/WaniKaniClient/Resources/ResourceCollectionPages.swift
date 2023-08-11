@@ -1,9 +1,9 @@
 import Foundation
 
 public struct ResourceCollectionPages: Codable, Equatable {
-    public let previousURL: URL?
-    public let nextURL: URL?
-    public let itemsPerPage: Int
+    public var previousURL: URL?
+    public var nextURL: URL?
+    public var itemsPerPage: Int
     
     public init(previousURL: URL? = nil,
                 nextURL: URL? = nil,

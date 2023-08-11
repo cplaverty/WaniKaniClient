@@ -1,10 +1,10 @@
 public struct VocabularyPronunciationAudioMetadata: Codable, Equatable {
-    public let gender: String
-    public let sourceID: Int
-    public let pronunciation: String
-    public let voiceActorID: Int
-    public let voiceActorName: String
-    public let voiceDescription: String
+    public var gender: String
+    public var sourceID: Int
+    public var pronunciation: String
+    public var voiceActorID: Int
+    public var voiceActorName: String
+    public var voiceDescription: String
     
     public init(gender: String,
                 sourceID: Int,

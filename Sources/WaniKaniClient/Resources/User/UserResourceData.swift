@@ -1,14 +1,14 @@
 import Foundation
 
 public struct UserResourceData: Codable, Equatable {
-    public let id: String
-    public let username: String
-    public let level: Int
-    public let profileURL: URL
-    public let startedAt: Date
-    public let currentVacationStartedAt: Date?
-    public let subscription: UserSubscription
-    public let preferences: UserPreferences
+    public var id: String
+    public var username: String
+    public var level: Int
+    public var profileURL: URL
+    public var startedAt: Date
+    public var currentVacationStartedAt: Date?
+    public var subscription: UserSubscription
+    public var preferences: UserPreferences
     
     public init(id: String,
                 username: String,

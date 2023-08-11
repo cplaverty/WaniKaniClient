@@ -1,10 +1,10 @@
 import Foundation
 
 public struct UserSubscription: Codable, Equatable {
-    public let isActive: Bool
-    public let type: UserSubscriptionType
-    public let maxLevelGranted: Int
-    public let periodEndsAt: Date?
+    public var isActive: Bool
+    public var type: UserSubscriptionType
+    public var maxLevelGranted: Int
+    public var periodEndsAt: Date?
     
     public init(isActive: Bool,
                 type: UserSubscriptionType,

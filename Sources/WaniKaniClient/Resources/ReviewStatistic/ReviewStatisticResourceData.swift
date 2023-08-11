@@ -1,19 +1,19 @@
 import Foundation
 
 public struct ReviewStatisticResourceData: Codable, Equatable {
-    public let createdAt: Date
-    public let subjectID: Int
-    public let subjectType: SubjectType
-    public let meaningCorrect: Int
-    public let meaningIncorrect: Int
-    public let meaningMaxStreak: Int
-    public let meaningCurrentStreak: Int
-    public let readingCorrect: Int
-    public let readingIncorrect: Int
-    public let readingMaxStreak: Int
-    public let readingCurrentStreak: Int
-    public let percentageCorrect: Int
-    public let isHidden: Bool
+    public var createdAt: Date
+    public var subjectID: Int
+    public var subjectType: SubjectType
+    public var meaningCorrect: Int
+    public var meaningIncorrect: Int
+    public var meaningMaxStreak: Int
+    public var meaningCurrentStreak: Int
+    public var readingCorrect: Int
+    public var readingIncorrect: Int
+    public var readingMaxStreak: Int
+    public var readingCurrentStreak: Int
+    public var percentageCorrect: Int
+    public var isHidden: Bool
     
     public init(createdAt: Date,
                 subjectID: Int,

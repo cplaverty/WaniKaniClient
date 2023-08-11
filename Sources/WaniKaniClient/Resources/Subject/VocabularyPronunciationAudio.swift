@@ -1,9 +1,9 @@
 import Foundation
 
 public struct VocabularyPronunciationAudio: Codable, Equatable {
-    public let url: URL
-    public let metadata: VocabularyPronunciationAudioMetadata
-    public let contentType: String
+    public var url: URL
+    public var metadata: VocabularyPronunciationAudioMetadata
+    public var contentType: String
     
     public init(url: URL,
                 metadata: VocabularyPronunciationAudioMetadata,

@@ -1,18 +1,17 @@
 import Foundation
 
 public struct LevelProgressionResource: Codable, Equatable {
-    public let id: Int
-    public let objectType: ResourceObjectType
-    public let url: URL
-    public let dataUpdatedAt: Date
-    public let data: LevelProgressionResourceData
+    public var id: Int
+    public let objectType: ResourceObjectType = .levelProgression
+    public var url: URL
+    public var dataUpdatedAt: Date
+    public var data: LevelProgressionResourceData
     
     public init(id: Int,
                 url: URL,
                 dataUpdatedAt: Date,
                 data: LevelProgressionResourceData) {
         self.id = id
-        self.objectType = .levelProgression
         self.url = url
         self.dataUpdatedAt = dataUpdatedAt
         self.data = data

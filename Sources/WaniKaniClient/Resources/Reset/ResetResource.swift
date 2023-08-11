@@ -1,18 +1,17 @@
 import Foundation
 
 public struct ResetResource: Codable, Equatable {
-    public let id: Int
-    public let objectType: ResourceObjectType
-    public let url: URL
-    public let dataUpdatedAt: Date
-    public let data: ResetResourceData
+    public var id: Int
+    public let objectType: ResourceObjectType = .reset
+    public var url: URL
+    public var dataUpdatedAt: Date
+    public var data: ResetResourceData
     
     public init(id: Int,
                 url: URL,
                 dataUpdatedAt: Date,
                 data: ResetResourceData) {
         self.id = id
-        self.objectType = .reset
         self.url = url
         self.dataUpdatedAt = dataUpdatedAt
         self.data = data

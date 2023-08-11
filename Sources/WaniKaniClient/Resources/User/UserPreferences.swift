@@ -1,9 +1,9 @@
 public struct UserPreferences: Codable, Equatable {
-    public let lessonsAutoplayAudio: Bool
-    public let lessonsBatchSize: Int
-    public let lessonsPresentationOrder: LessonsPresentationOrder
-    public let reviewsAutoplayAudio: Bool
-    public let reviewsDisplaySRSIndicator: Bool
+    public var lessonsAutoplayAudio: Bool
+    public var lessonsBatchSize: Int
+    public var lessonsPresentationOrder: LessonsPresentationOrder
+    public var reviewsAutoplayAudio: Bool
+    public var reviewsDisplaySRSIndicator: Bool
     
     public init(lessonsAutoplayAudio: Bool,
                 lessonsBatchSize: Int,
