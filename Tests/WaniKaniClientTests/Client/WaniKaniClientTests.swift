@@ -27,10 +27,10 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
-            
             let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
             XCTAssertEqual(resource, expected)
+            
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)
@@ -44,21 +44,30 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":null},"total_count":1,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURL)","pages":{"per_page":1,"next_url":null,"previous_url":null},"total_count":1,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         
-        let expected = [TestResource(string: "content")]
+        let expected = [
+            ResourceCollection(
+                object: "collection",
+                url: requestURL,
+                pages: ResourceCollectionPages(itemsPerPage: 1),
+                totalCount: 1,
+                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                data: [TestResource(string: "content")])
+        ]
         
         let urlSession = makeURLSession()
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
+            let resources = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+                .reduce(into: [], { $0.append($1) })
+            XCTAssertEqual(resources, expected)
             
-            let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
-            XCTAssertEqual(resource, expected)
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)
@@ -73,7 +82,7 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURL)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         MockURLProtocol.requestHandler[requestURLPage2] = { request in
@@ -81,22 +90,37 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURLPage2.absoluteString)","pages":{"per_page":1,"next_url":null,"previous_url":"\#(requestURL)"},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content2"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURLPage2)","pages":{"per_page":1,"next_url":null,"previous_url":"\#(requestURL)"},"total_count":2,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content2"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         
-        let expected = [TestResource(string: "content"),
-                        TestResource(string: "content2")]
+        let expected = [
+            ResourceCollection(
+                object: "collection",
+                url: requestURL,
+                pages: ResourceCollectionPages(nextURL: requestURLPage2, itemsPerPage: 1),
+                totalCount: 2,
+                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                data: [TestResource(string: "content")]),
+            ResourceCollection(
+                object: "collection",
+                url: requestURLPage2,
+                pages: ResourceCollectionPages(previousURL: requestURL, itemsPerPage: 1),
+                totalCount: 2,
+                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                data: [TestResource(string: "content2")])
+        ]
         
         let urlSession = makeURLSession()
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
+            let resources = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+                .reduce(into: [], { $0.append($1) })
+            XCTAssertEqual(resources, expected)
             
-            let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
-            XCTAssertEqual(resource, expected)
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)
@@ -111,7 +135,7 @@ final class WaniKaniClientTests: XCTestCase {
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
-            let testData = #"{"object":"collection","url":"\#(requestURL.absoluteString)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":3,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
+            let testData = #"{"object":"collection","url":"\#(requestURL)","pages":{"per_page":1,"next_url":"\#(requestURLPage2)","previous_url":null},"total_count":3,"data_updated_at":"2019-01-01T00:00:00.000000Z","data":[{"string":"content"}]}"#.data(using: .utf8)!
             return (response, testData)
         }
         MockURLProtocol.requestHandler[requestURLPage2] = { request in
@@ -120,21 +144,34 @@ final class WaniKaniClientTests: XCTestCase {
             throw URLError(.notConnectedToInternet)
         }
         
+        let expected = ResourceCollection(
+            object: "collection",
+            url: requestURL,
+            pages: ResourceCollectionPages(nextURL: requestURLPage2, itemsPerPage: 1),
+            totalCount: 3,
+            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+            data: [TestResource(string: "content")])
+        
         let urlSession = makeURLSession()
         
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
+            var iter = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)).makeAsyncIterator()
+            
+            let first = try await iter.next()
+            XCTAssertEqual(first, expected)
             
             do {
-                let resource = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
-                XCTFail("Request was not expected to succeed but got resource: \(resource)")
+                let second = try await iter.next()
+                XCTFail("Request was not expected to succeed but got resource: \(String(describing: second))")
             } catch let error as URLError {
                 XCTAssertEqual(error.code, .notConnectedToInternet)
             } catch {
                 XCTFail("Request failed with an unexpected error: \(error)")
             }
+            
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)
@@ -157,8 +194,6 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
-            
             do {
                 let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
@@ -167,6 +202,8 @@ final class WaniKaniClientTests: XCTestCase {
             } catch {
                 XCTFail("Request failed with an unexpected error: \(error)")
             }
+            
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)
@@ -189,8 +226,6 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            defer { expect.fulfill() }
-            
             do {
                 let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
@@ -200,6 +235,8 @@ final class WaniKaniClientTests: XCTestCase {
             } catch {
                 XCTFail("Request failed with an unexpected error: \(error)")
             }
+            
+            expect.fulfill()
         }
         
         await fulfillment(of: [expect], timeout: 3)

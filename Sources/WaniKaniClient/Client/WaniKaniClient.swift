@@ -22,16 +22,29 @@ public final class WaniKaniClient: ResourceRequestClient {
         return resource
     }
     
-    public func loadCollectionRequest<Request: ResourceCollectionRequest>(_ request: Request) async throws -> [Request.Resource] {
-        var resourceCollection = try await loadResource(from: request.requestURL, resourceDecoder: request.decodeResource(from:))
-        var resources = resourceCollection.data
-
-        while let nextURL = resourceCollection.pages.nextURL {
-            resourceCollection = try await loadResource(from: nextURL, resourceDecoder: request.decodeResource(from:))
-            resources += resourceCollection.data
+    public func loadCollectionRequest<Request: ResourceCollectionRequest>(_ request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
+        AsyncThrowingStream { continuation in
+            let task = Task {
+                do {
+                    var nextURL: URL? = request.requestURL
+                    
+                    while let url = nextURL {
+                        try Task.checkCancellation()
+                        
+                        let resourceCollection = try await loadResource(from: url, resourceDecoder: request.decodeResource(from:))
+                        continuation.yield(resourceCollection)
+                        
+                        nextURL = resourceCollection.pages.nextURL
+                    }
+                    
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
+                }
+            }
+            
+            continuation.onTermination = { _ in task.cancel() }
         }
-        
-        return resources
     }
     
     private func loadResource<Resource>(from url: URL, resourceDecoder: (Data) throws -> Resource) async throws -> Resource {
