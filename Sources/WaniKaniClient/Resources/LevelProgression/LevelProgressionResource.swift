@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LevelProgressionResource: Codable, Equatable {
+public struct LevelProgressionResource: WaniKaniResource {
     public var id: Int
     public let objectType: ResourceObjectType = .levelProgression
     public var url: URL

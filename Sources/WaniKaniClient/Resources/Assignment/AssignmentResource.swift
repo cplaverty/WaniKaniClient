@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AssignmentResource: Codable, Equatable {
+public struct AssignmentResource: WaniKaniResource {
     public var id: Int
     public let objectType: ResourceObjectType = .assignment
     public var url: URL

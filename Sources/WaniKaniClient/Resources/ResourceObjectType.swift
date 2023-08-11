@@ -11,4 +11,6 @@ public enum ResourceObjectType: String, Codable {
     case studyMaterial = "study_material"
     case user
     case vocabulary
+    case collection
+    case unknown
 }

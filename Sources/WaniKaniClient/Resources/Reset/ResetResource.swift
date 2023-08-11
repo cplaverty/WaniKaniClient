@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ResetResource: Codable, Equatable {
+public struct ResetResource: WaniKaniResource {
     public var id: Int
     public let objectType: ResourceObjectType = .reset
     public var url: URL

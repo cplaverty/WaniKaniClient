@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserResource: Codable, Equatable {
+public struct UserResource: WaniKaniResource {
     public let objectType: ResourceObjectType = .user
     public var url: URL
     public var dataUpdatedAt: Date

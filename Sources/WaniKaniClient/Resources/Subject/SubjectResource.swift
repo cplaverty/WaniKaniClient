@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SubjectResource: Codable, Equatable {
+public struct SubjectResource: WaniKaniResource {
     public var id: Int
     public private(set) var objectType: ResourceObjectType
     public var url: URL

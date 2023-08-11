@@ -1,6 +1,6 @@
 import Foundation
 
-public struct StudyMaterialResource: Codable, Equatable {
+public struct StudyMaterialResource: WaniKaniResource {
     public var id: Int
     public let objectType: ResourceObjectType = .studyMaterial
     public var url: URL

@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol ResourceRequest {
-    associatedtype Resource: Codable
+    associatedtype Resource: WaniKaniResource
     typealias ResponseType = Resource
     
     var requestURL: URL { get }
