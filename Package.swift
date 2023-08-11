@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "WaniKaniClient",
     platforms: [
-        .iOS(.v13), .macOS(.v10_15), .tvOS(.v13)
+        .iOS(.v15), .macOS(.v12), .tvOS(.v15)
     ],
     products: [
         .library(

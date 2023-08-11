@@ -4,5 +4,5 @@ Client for the WaniKani v2 API.
 
 ## Requirements
 
-- iOS 13.0+ / macOS 10.15+ / tvOS 13.0+
+- iOS 15.0+ / macOS 12.0+ / tvOS 15.0+
 - Swift 5.8+

@@ -19,6 +19,7 @@ public final class WaniKaniClient: ResourceRequestClient {
     
     public func loadRequest<Request: ResourceRequest>(_ request: Request) async throws -> Request.Resource {
         let resource = try await loadResource(from: request.requestURL, resourceDecoder: request.decodeResource(from:))
+        logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
         return resource
     }
     
@@ -32,6 +33,7 @@ public final class WaniKaniClient: ResourceRequestClient {
                         try Task.checkCancellation()
                         
                         let resourceCollection = try await loadResource(from: url, resourceDecoder: request.decodeResource(from:))
+                        logger.log("Loaded collection of \(resourceCollection.data.count) item(s) of type \(Request.Resource.self, privacy: .public)")
                         continuation.yield(resourceCollection)
                         
                         nextURL = resourceCollection.pages.nextURL
@@ -57,22 +59,27 @@ public final class WaniKaniClient: ResourceRequestClient {
         let httpStatusCode = httpResponse.statusCode
         let httpStatusCodeDescription = HTTPURLResponse.localizedString(forStatusCode: httpStatusCode)
         
-        os_log("Response: %{public}@ (%d), %{iec-bytes}d received", type: .debug, httpStatusCodeDescription, httpStatusCode, data.count)
+        logger.debug("Response: \(httpStatusCode) (\(httpStatusCodeDescription, privacy: .public)), \(data.count, format: .byteCountIEC) received")
         
         switch httpStatusCode {
         case 200:
             return try resourceDecoder(data)
         case 401:
+            logger.error("API Key \(self.apiKey, privacy: .private(mask: .hash)) was rejected by WK API")
             throw WaniKaniClientError.invalidAPIKey
         case 429:
+            let resetTime = httpResponse.value(forHTTPHeaderField: "RateLimit-Reset") ?? "<unknown>"
+            logger.log("Received 429 (Too Many Requests): rate limit will be reset at \(resetTime, privacy: .public)")
             throw WaniKaniClientError.tooManyRequests
         case 400 ..< 600:
             if let error = try? JSONDecoder().decode(WaniKaniClientError.self, from: data) {
-                os_log("Error message received: %{public}@", type: .debug, error.localizedDescription)
+                logger.error("Error message received from WK API: \(error, privacy: .public)")
                 throw error
             }
+            logger.error("Received HTTP status code \(httpStatusCode) but an unexpected response from the WK server: \(data, privacy: .private)")
             throw WaniKaniClientError.unknownError(httpStatusCode: httpStatusCode, message: httpStatusCodeDescription)
         default:
+            logger.error("Received unhandled HTTP status code \(httpStatusCode): \(data, privacy: .private)")
             throw WaniKaniClientError.unhandledStatusCode(httpStatusCode: httpStatusCode, data: data)
         }
     }
@@ -80,7 +87,7 @@ public final class WaniKaniClient: ResourceRequestClient {
     private func data(from url: URL) async throws -> (Data, URLResponse) {
         let urlRequest = makeURLRequest(url: url)
         
-        os_log("Initiating request for %@", type: .debug, url.absoluteString)
+        logger.info("Initiating request for \(url, privacy: .public)")
         return try await urlSession.data(for: urlRequest)
     }
     
