@@ -1,11 +1,19 @@
 import Foundation
 
-open class ResourceDecoder {
-    public static var shared = ResourceDecoder()
+/// Decodes WaniKani resources from their JSON representation.
+final class ResourceDecoder {
+    public static let shared = ResourceDecoder()
     
     public init() {
     }
     
+    /// Decodes a WaniKani resource of the given type from the given JSON representation.
+    ///
+    /// - Parameters:
+    ///   - type: The type of the resource to decode.
+    ///   - data: The data to decode from.
+    /// - Returns: A value of the requested type.
+    /// - Throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted, or if the given data is not valid JSON.
     public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .waniKani

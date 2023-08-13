@@ -1,11 +1,16 @@
 import Foundation
 
-open class ResourceEncoder {
-    public static var shared = ResourceEncoder()
+/// Encodes WaniKani resources to their JSON representation.
+final class ResourceEncoder {
+    public static let shared = ResourceEncoder()
     
     public init() {
     }
     
+    /// Encodes the given WaniKani resource and returns its JSON representation.
+    ///
+    /// - Parameter value: The value to encode.
+    /// - Returns: A new `Data` value containing the encoded JSON data.
     public func encode<T: Encodable>(_ value: T) throws -> Data {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .waniKani
