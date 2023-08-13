@@ -26,7 +26,7 @@ public struct GetAllStudyMaterialsRequest {
     }
 }
 
-extension GetAllStudyMaterialsRequest: ResourceCollectionRequest {
+extension GetAllStudyMaterialsRequest: ResourceCollectionGetRequest {
     public typealias Resource = StudyMaterialResource
     
     public var requestURL: URL {

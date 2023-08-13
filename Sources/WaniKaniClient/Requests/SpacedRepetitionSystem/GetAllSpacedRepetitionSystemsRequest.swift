@@ -15,7 +15,7 @@ public struct GetAllSpacedRepetitionSystemsRequest {
     }
 }
 
-extension GetAllSpacedRepetitionSystemsRequest: ResourceCollectionRequest {
+extension GetAllSpacedRepetitionSystemsRequest: ResourceCollectionGetRequest {
     public typealias Resource = SpacedRepetitionSystemResource
     
     public var requestURL: URL {

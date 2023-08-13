@@ -10,7 +10,7 @@ public struct GetAssignmentRequest {
     }
 }
 
-extension GetAssignmentRequest: ResourceRequest {
+extension GetAssignmentRequest: ResourceGetRequest {
     public typealias Resource = AssignmentResource
     
     public var requestURL: URL {

@@ -35,7 +35,7 @@ public struct GetAllReviewStatisticsRequest {
     }
 }
 
-extension GetAllReviewStatisticsRequest: ResourceCollectionRequest {
+extension GetAllReviewStatisticsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ReviewStatisticResource
     
     public var requestURL: URL {

@@ -10,7 +10,7 @@ public struct GetReviewStatisticRequest {
     }
 }
 
-extension GetReviewStatisticRequest: ResourceRequest {
+extension GetReviewStatisticRequest: ResourceGetRequest {
     public typealias Resource = ReviewStatisticResource
     
     public var requestURL: URL {

@@ -14,7 +14,7 @@ public struct GetAllResetsRequest {
     }
 }
 
-extension GetAllResetsRequest: ResourceCollectionRequest {
+extension GetAllResetsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ResetResource
     
     public var requestURL: URL {

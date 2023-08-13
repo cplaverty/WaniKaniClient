@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 
 public final class WaniKaniClient: ResourceRequestClient {
     public static let apiRevision = "20170710"
@@ -17,13 +16,13 @@ public final class WaniKaniClient: ResourceRequestClient {
         urlSession.invalidateAndCancel()
     }
     
-    public func loadRequest<Request: ResourceRequest>(_ request: Request) async throws -> Request.Resource {
-        let resource = try await loadResource(from: request.requestURL, resourceDecoder: request.decodeResource(from:))
+    public func loadRequest<Request: ResourceGetRequest>(_ request: Request) async throws -> Request.Resource {
+        let resource = try await loadResource(Request.Resource.self, from: request.requestURL)
         logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
         return resource
     }
     
-    public func loadCollectionRequest<Request: ResourceCollectionRequest>(_ request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
+    public func loadCollectionRequest<Request: ResourceCollectionGetRequest>(_ request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
@@ -32,7 +31,7 @@ public final class WaniKaniClient: ResourceRequestClient {
                     while let url = nextURL {
                         try Task.checkCancellation()
                         
-                        let resourceCollection = try await loadResource(from: url, resourceDecoder: request.decodeResource(from:))
+                        let resourceCollection = try await loadResource(ResourceCollection<Request.Resource>.self, from: url)
                         logger.log("Loaded collection of \(resourceCollection.data.count) item(s) of type \(Request.Resource.self, privacy: .public)")
                         continuation.yield(resourceCollection)
                         
@@ -49,7 +48,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         }
     }
     
-    private func loadResource<Resource>(from url: URL, resourceDecoder: (Data) throws -> Resource) async throws -> Resource {
+    private func loadResource<Resource: Codable>(_ type: Resource.Type, from url: URL) async throws -> Resource {
         let (data, response) = try await data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -63,7 +62,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         
         switch httpStatusCode {
         case 200:
-            return try resourceDecoder(data)
+            return try ResourceDecoder.shared.decode(Resource.self, from: data)
         case 401:
             logger.error("API Key \(self.apiKey, privacy: .private(mask: .hash)) was rejected by WK API")
             throw WaniKaniClientError.invalidAPIKey

@@ -14,7 +14,7 @@ public struct GetAllVoiceActorsRequest {
     }
 }
 
-extension GetAllVoiceActorsRequest: ResourceCollectionRequest {
+extension GetAllVoiceActorsRequest: ResourceCollectionGetRequest {
     public typealias Resource = VoiceActorResource
     
     public var requestURL: URL {

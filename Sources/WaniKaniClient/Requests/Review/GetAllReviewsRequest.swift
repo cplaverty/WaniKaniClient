@@ -22,7 +22,7 @@ public struct GetAllReviewsRequest {
     }
 }
 
-extension GetAllReviewsRequest: ResourceCollectionRequest {
+extension GetAllReviewsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ReviewResource
     
     public var requestURL: URL {

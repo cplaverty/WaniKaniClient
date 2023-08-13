@@ -18,7 +18,7 @@ public struct GetAllLevelProgressionsRequest {
     }
 }
 
-extension GetAllLevelProgressionsRequest: ResourceCollectionRequest {
+extension GetAllLevelProgressionsRequest: ResourceCollectionGetRequest {
     public typealias Resource = LevelProgressionResource
     
     public var requestURL: URL {

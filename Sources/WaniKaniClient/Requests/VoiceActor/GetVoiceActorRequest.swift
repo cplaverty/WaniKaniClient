@@ -10,7 +10,7 @@ public struct GetVoiceActorRequest {
     }
 }
 
-extension GetVoiceActorRequest: ResourceRequest {
+extension GetVoiceActorRequest: ResourceGetRequest {
     public typealias Resource = VoiceActorResource
     
     public var requestURL: URL {

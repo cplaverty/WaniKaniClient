@@ -6,7 +6,7 @@ public struct GetUserRequest {
     }
 }
 
-extension GetUserRequest: ResourceRequest {
+extension GetUserRequest: ResourceGetRequest {
     public typealias Resource = UserResource
     
     public var requestURL: URL {

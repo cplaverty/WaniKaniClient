@@ -10,7 +10,7 @@ public struct GetResetRequest {
     }
 }
 
-extension GetResetRequest: ResourceRequest {
+extension GetResetRequest: ResourceGetRequest {
     public typealias Resource = ResetResource
     
     public var requestURL: URL {

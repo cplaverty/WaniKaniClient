@@ -30,7 +30,7 @@ public struct GetAllSubjectsRequest {
     }
 }
 
-extension GetAllSubjectsRequest: ResourceCollectionRequest {
+extension GetAllSubjectsRequest: ResourceCollectionGetRequest {
     public typealias Resource = SubjectResource
     
     public var requestURL: URL {
