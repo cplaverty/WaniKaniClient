@@ -38,6 +38,14 @@ public struct SubjectResource: WaniKaniResource {
         self.data = .vocabulary(data)
     }
     
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: KanaVocabularyResourceData) {
+        self.id = id
+        self.objectType = .kanaVocabulary
+        self.url = url
+        self.dataUpdatedAt = dataUpdatedAt
+        self.data = .kanaVocabulary(data)
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
@@ -60,6 +68,8 @@ public struct SubjectResource: WaniKaniResource {
             try container.encode(k, forKey: .data)
         case let .vocabulary(v):
             try container.encode(v, forKey: .data)
+        case let .kanaVocabulary(v):
+            try container.encode(v, forKey: .data)
         }
     }
     
@@ -81,6 +91,8 @@ private extension KeyedDecodingContainerProtocol {
             return .kanji(try decode(KanjiResourceData.self, forKey: key))
         case .vocabulary:
             return .vocabulary(try decode(VocabularyResourceData.self, forKey: key))
+        case .kanaVocabulary:
+            return .kanaVocabulary(try decode(KanaVocabularyResourceData.self, forKey: key))
         default:
             throw DecodingError.dataCorruptedError(forKey: key, in: self, debugDescription: "Invalid subject type \(type)")
         }

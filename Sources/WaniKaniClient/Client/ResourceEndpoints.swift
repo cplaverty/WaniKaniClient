@@ -8,10 +8,12 @@ public final class ResourceEndpoints {
     public private(set) lazy var resets: URL = baseURL.appendingPathComponent("resets")
     public private(set) lazy var reviews: URL = baseURL.appendingPathComponent("reviews")
     public private(set) lazy var reviewStatistics: URL = baseURL.appendingPathComponent("review_statistics")
+    public private(set) lazy var spacedRepetitionSystems: URL = baseURL.appendingPathComponent("spaced_repetition_systems")
     public private(set) lazy var studyMaterials: URL = baseURL.appendingPathComponent("study_materials")
     public private(set) lazy var subjects: URL = baseURL.appendingPathComponent("subjects")
     public private(set) lazy var user: URL = baseURL.appendingPathComponent("user")
-    
+    public private(set) lazy var voiceActors: URL = baseURL.appendingPathComponent("voice_actors")
+
     public let baseURL: URL
     
     public init(baseURL: URL) {

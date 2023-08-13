@@ -37,27 +37,27 @@ final class VocabularyResourceDataTests: XCTestCase {
                 pronunciationAudios: [
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/xzymh7gye9b6p59oqtgtahxwcfw7")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "male", sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .male, sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
                         contentType: "audio/webm"),
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/62jun2mak5sp5eh8hccy8epfsocg")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "male", sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .male, sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
                         contentType: "audio/ogg"),
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/hh8gc6v9iurvaz61fuyub817bw5q")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "female", sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .female, sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
                         contentType: "audio/webm"),
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/giaqri5u6zr5i96kkthbbnvhj4qt")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "female", sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .female, sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
                         contentType: "audio/mpeg"),
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/9lzgz496ba6xeuj78icwqd9fzu4p")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "female", sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .female, sourceID: 21630, pronunciation: "いち", voiceActorID: 1, voiceActorName: "Kyoko", voiceDescription: "Tokyo accent"),
                         contentType: "audio/ogg"),
                     VocabularyPronunciationAudio(
                         url: URL(string: "https://files.wanikani.com/v6a1op509bhemf3fgsi6z07yw6o0")!,
-                        metadata: VocabularyPronunciationAudioMetadata(gender: "male", sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
+                        metadata: VocabularyPronunciationAudioMetadata(gender: .male, sourceID: 2711, pronunciation: "いち", voiceActorID: 2, voiceActorName: "Kenichi", voiceDescription: "Tokyo accent"),
                         contentType: "audio/mpeg"),
                 ],
                 lessonPosition: 44,

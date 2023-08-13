@@ -3,4 +3,5 @@ public enum SubjectType: String, Codable, CaseIterable {
     case radical
     case kanji
     case vocabulary
+    case kanaVocabulary = "kana_vocabulary"
 }

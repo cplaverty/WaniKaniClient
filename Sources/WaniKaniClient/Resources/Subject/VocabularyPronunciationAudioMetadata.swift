@@ -1,6 +1,6 @@
 public struct VocabularyPronunciationAudioMetadata: Codable, Equatable {
     /// The gender of the voice actor.
-    public var gender: String
+    public var gender: Gender
     /// A unique ID shared between same source pronunciation audio.
     public var sourceID: Int
     /// Vocabulary being pronounced in kana.
@@ -12,7 +12,7 @@ public struct VocabularyPronunciationAudioMetadata: Codable, Equatable {
     /// Description of the voice.
     public var voiceDescription: String
     
-    public init(gender: String,
+    public init(gender: Gender,
                 sourceID: Int,
                 pronunciation: String,
                 voiceActorID: Int,
