@@ -1,9 +1,14 @@
 import Foundation
 
+/// Returns a collection of all reviews, ordered by ascending ``ReviewResourceData/createdAt``, 1000 at a time.
 public struct GetAllReviewsRequest {
+    /// Only reviews where ``ReviewResourceData/assignmentID`` matches one of the array values are returned.
     public var assignmentIDs: [Int]?
+    /// Only reviews where ``ReviewResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Only reviews where ``ReviewResourceData/subjectID`` matches one of the array values are returned.
     public var subjectIDs: [Int]?
+    /// Only reviews updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(assignmentIDs: [Int]? = nil,

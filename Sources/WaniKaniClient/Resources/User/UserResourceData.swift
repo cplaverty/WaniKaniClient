@@ -1,13 +1,21 @@
 import Foundation
 
 public struct UserResourceData: Codable, Equatable {
+    /// Unique identifier of the user.
     public var id: String
+    /// The user's username.
     public var username: String
+    /// The current level of the user. This ignores subscription status.
     public var level: Int
+    /// The URL to the user's public facing profile page.
     public var profileURL: URL
+    /// The signup date for the user.
     public var startedAt: Date
+    /// If the user is on vacation, this will be the timestamp of when that vacation started. If the user is not on vacation, this is `nil`.
     public var currentVacationStartedAt: Date?
+    /// Details about the user's subscription state.
     public var subscription: UserSubscription
+    /// User settings specific to the WaniKani application.
     public var preferences: UserPreferences
     
     public init(id: String,

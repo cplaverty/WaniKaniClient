@@ -1,7 +1,11 @@
 public struct RadicalCharacterImageMetadata: Codable, Equatable {
+    /// Color of the asset in hexadecimal.
     public var color: String?
+    /// Dimension of the asset in pixels.
     public var dimensions: String?
+    /// A name descriptor.
     public var styleName: String?
+    /// Indicates if the SVG asset contains built-in CSS styling.
     public var inlineStyles: Bool?
     
     public init(color: String? = nil,

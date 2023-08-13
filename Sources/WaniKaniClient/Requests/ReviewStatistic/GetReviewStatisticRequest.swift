@@ -1,6 +1,8 @@
 import Foundation
 
+/// Retrieves a specific review statistic by its ``ReviewStatisticResource/id``.
 public struct GetReviewStatisticRequest {
+    /// Unique identifier of the review statistic.
     public var id: Int
     
     public init(id: Int) {

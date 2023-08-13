@@ -1,11 +1,18 @@
 import Foundation
 
+/// Returns a collection of all subjects, ordered by ascending ``SubjectResourceData/createdAt``, 1000 at a time.
 public struct GetAllSubjectsRequest {
+    /// Only subjects where ``SubjectResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Return subjects of the specified types.
     public var types: [SubjectType]?
+    /// Return subjects of the specified slug.
     public var slugs: [String]?
+    /// Return subjects at the specified levels.
     public var levels: [Int]?
+    /// Return subjects which are or are not hidden from the user-facing application.
     public var isHidden: Bool?
+    /// Only subjects updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(ids: [Int]? = nil,

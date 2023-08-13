@@ -1,12 +1,21 @@
 import Foundation
 
+/// Returns a collection of all review statistics, ordered by ascending ``ReviewStatisticResourceData/createdAt``,
+/// 500 at a time.
 public struct GetAllReviewStatisticsRequest {
+    /// Return review statistics with a matching value in ``ReviewStatisticResourceData/isHidden``.
     public var isHidden: Bool?
+    /// Only review statistics where ``ReviewStatisticResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Return review statistics where the ``ReviewStatisticResourceData/percentageCorrect`` is greater than the value.
     public var percentagesGreaterThan: Int?
+    /// Return review statistics where the ``ReviewStatisticResourceData/percentageCorrect`` is less than the value.
     public var percentagesLessThan: Int?
+    /// Only review statistics where ``ReviewStatisticResourceData/subjectID`` matches one of the array values are returned.
     public var subjectIDs: [Int]?
+    /// Only review statistics where ``ReviewStatisticResourceData/subjectType`` matches one of the array values are returned.
     public var subjectTypes: [SubjectType]?
+    /// Only review statistics updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(isHidden: Bool? = nil,

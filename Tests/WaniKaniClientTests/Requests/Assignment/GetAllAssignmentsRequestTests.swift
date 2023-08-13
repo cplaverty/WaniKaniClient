@@ -86,22 +86,6 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         XCTAssertEqual(request.requestURL, expected)
     }
     
-    func testPassed() {
-        let expected = URL(string: "assignments?passed=false", relativeTo: baseURL)!.absoluteURL
-        
-        let request = GetAllAssignmentsRequest(isPassed: false)
-        
-        XCTAssertEqual(request.requestURL, expected)
-    }
-    
-    func testResurrected() {
-        let expected = URL(string: "assignments?resurrected=true", relativeTo: baseURL)!.absoluteURL
-        
-        let request = GetAllAssignmentsRequest(isResurrected: true)
-        
-        XCTAssertEqual(request.requestURL, expected)
-    }
-    
     func testSRSStages() {
         let expected = URL(string: "assignments?srs_stages=9", relativeTo: baseURL)!.absoluteURL
         

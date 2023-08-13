@@ -1,22 +1,42 @@
 import Foundation
 
+/// Returns a collection of all assignments, ordered by ascending ``AssignmentResourceData/createdAt``, 500 at a time.
+///
+/// > Important: It is possible for a user to have started an assignment for a subject that was later moved to a
+/// level above their current level. To exclude those assignments, filter by levels from 1 to the users current level.
 public struct GetAllAssignmentsRequest {
+    /// Only assignments available at or after this time are returned.
     public var availableAfter: Date?
+    /// Only assignments available at or before this time are returned.
     public var availableBefore: Date?
+    /// When `true`, returns assignments that have a value in ``AssignmentResourceData/burnedAt``.
+    /// When `false`, returns assignments with ``AssignmentResourceData/burnedAt`` set to `nil`.
     public var isBurned: Bool?
+    /// Return assignments with a matching value in ``AssignmentResourceData/isHidden``.
     public var isHidden: Bool?
+    /// Only assignments where ``AssignmentResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Returns assignments which are immediately available for lessons.
     public var immediatelyAvailableForLessons: Bool?
+    /// Returns assignments which are immediately available for review.
     public var immediatelyAvailableForReview: Bool?
+    /// Returns assignments which are in the review state.
     public var inReview: Bool?
+    /// Only assignments where the associated subject level matches one of the array values are returned. Valid values range from 1 to 60.
     public var levels: [Int]?
-    public var isPassed: Bool?
-    public var isResurrected: Bool?
+    /// Only assignments where ``AssignmentResourceData/srsStage`` matches one of the array values are returned. Valid values range from 0 to 9.
     public var srsStages: [Int]?
+    /// When `true`, returns assignments that have a value in ``AssignmentResourceData/startedAt``.
+    /// When `false`, returns assignments with ``AssignmentResourceData/startedAt`` set to `nil`.
     public var isStarted: Bool?
+    /// Only assignments where ``AssignmentResourceData/subjectID`` matches one of the array values are returned.
     public var subjectIDs: [Int]?
+    /// Only assignments where ``AssignmentResourceData/subjectType`` matches one of the array values are returned.
     public var subjectTypes: [SubjectType]?
+    /// When `true`, returns assignments that have a value in ``AssignmentResourceData/unlockedAt``.
+    /// When `false`, returns assignments with ``AssignmentResourceData/unlockedAt`` set to `nil`.
     public var isUnlocked: Bool?
+    /// Only assignments updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(availableAfter: Date? = nil,
@@ -28,8 +48,6 @@ public struct GetAllAssignmentsRequest {
                 immediatelyAvailableForReview: Bool? = nil,
                 inReview: Bool? = nil,
                 levels: [Int]? = nil,
-                isPassed: Bool? = nil,
-                isResurrected: Bool? = nil,
                 srsStages: [Int]? = nil,
                 isStarted: Bool? = nil,
                 subjectIDs: [Int]? = nil,
@@ -45,8 +63,6 @@ public struct GetAllAssignmentsRequest {
         self.immediatelyAvailableForReview = immediatelyAvailableForReview
         self.inReview = inReview
         self.levels = levels
-        self.isPassed = isPassed
-        self.isResurrected = isResurrected
         self.srsStages = srsStages
         self.isStarted = isStarted
         self.subjectIDs = subjectIDs
@@ -72,8 +88,6 @@ extension GetAllAssignmentsRequest: ResourceCollectionRequest {
         queryItems.appendItemIfSet(name: "immediately_available_for_review", value: immediatelyAvailableForReview)
         queryItems.appendItemIfSet(name: "in_review", value: inReview)
         queryItems.appendItemsIfSet(name: "levels", values: levels)
-        queryItems.appendItemIfSet(name: "passed", value: isPassed)
-        queryItems.appendItemIfSet(name: "resurrected", value: isResurrected)
         queryItems.appendItemsIfSet(name: "srs_stages", values: srsStages)
         queryItems.appendItemIfSet(name: "started", value: isStarted)
         queryItems.appendItemsIfSet(name: "subject_ids", values: subjectIDs)

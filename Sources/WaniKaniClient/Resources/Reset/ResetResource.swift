@@ -1,9 +1,18 @@
 import Foundation
 
+/// Contains information about when resets happen, the starting level, and the target level.
+///
+/// Users can reset their progress back to any level at or below their current level. When they reset to a particular
+/// level, all of the ``AssignmentResource`` and ``ReviewStatisticResource`` at that level or higher are set back
+/// to their default state.
 public struct ResetResource: WaniKaniResource {
+    /// Unique identifier of the reset.
     public var id: Int
+    /// The kind of object returned.
     public let objectType: ResourceObjectType = .reset
+    /// The URL of the request.
     public var url: URL
+    /// The last time that particular resource was updated.
     public var dataUpdatedAt: Date
     public var data: ResetResourceData
     

@@ -1,6 +1,8 @@
 import Foundation
 
+/// Retrieves a specific level progression by its ``LevelProgressionResource/id``.
 public struct GetLevelProgressionRequest {
+    /// Unique identifier of the level progression.
     public var id: Int
     
     public init(id: Int) {

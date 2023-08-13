@@ -1,7 +1,14 @@
 import Foundation
 
+/// Returns a collection of all level progressions, ordered by ascending ``LevelProgressionResourceData/createdAt``,
+/// 500 at a time.
+///
+/// > Important: Logging for this endpoint has been implemented late in the application's life. Therefore, some
+/// users will not have a full history.
 public struct GetAllLevelProgressionsRequest {
+    /// Only level progressions where ``LevelProgressionResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Only levelProgressions updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(ids: [Int]? = nil,

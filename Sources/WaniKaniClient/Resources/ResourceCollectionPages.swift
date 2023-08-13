@@ -1,8 +1,11 @@
 import Foundation
 
 public struct ResourceCollectionPages: Codable, Equatable {
+    /// Maximum number of resources delivered for this collection.
     public var itemsPerPage: Int
+    /// The URL of the next page of results. If there are no more results, the value is `nil`.
     public var nextURL: URL?
+    /// The URL of the previous page of results. If there are no results at all or no previous page to go to, the value is `nil`.
     public var previousURL: URL?
     
     public init(itemsPerPage: Int,

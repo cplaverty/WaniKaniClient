@@ -1,5 +1,7 @@
 public struct VocabularyContextSentence: Codable, Equatable {
+    /// English translation of the sentence.
     public var english: String
+    /// Japanese context sentence.
     public var japanese: String
     
     public init(english: String,

@@ -3,7 +3,7 @@ import XCTest
 
 final class AssignmentResourceTests: XCTestCase {
     private let testData = """
-            {"id":79854763,"object":"assignment","url":"https://api.wanikani.com/v2/assignments/79854763","data_updated_at":"2019-05-29T23:08:08.254118Z","data":{"created_at":"2017-08-30T22:41:46.796284Z","subject_id":442,"subject_type":"kanji","srs_stage":5,"srs_stage_name":"Guru I","unlocked_at":"2019-02-24T22:51:46.976224Z","started_at":"2019-03-10T22:51:26.490164Z","passed_at":"2019-05-29T23:08:08.250981Z","burned_at":null,"available_at":"2019-06-05T22:00:00.000000Z","resurrected_at":null,"passed":true,"resurrected":false,"hidden":false}}
+            {"id":79854763,"object":"assignment","url":"https://api.wanikani.com/v2/assignments/79854763","data_updated_at":"2019-05-29T23:08:08.254118Z","data":{"created_at":"2017-08-30T22:41:46.796284Z","subject_id":442,"subject_type":"kanji","srs_stage":5,"unlocked_at":"2019-02-24T22:51:46.976224Z","started_at":"2019-03-10T22:51:26.490164Z","passed_at":"2019-05-29T23:08:08.250981Z","burned_at":null,"available_at":"2019-06-05T22:00:00.000000Z","resurrected_at":null,"hidden":false}}
             """.data(using: .utf8)!
     
     func testDecode() throws {
@@ -20,15 +20,12 @@ final class AssignmentResourceTests: XCTestCase {
                 subjectID: 442,
                 subjectType: .kanji,
                 srsStage: 5,
-                srsStageName: "Guru I",
                 unlockedAt: makeUTCDate(year: 2019, month: 2, day: 24, hour: 22, minute: 51, second: 46, microsecond: 976224),
                 startedAt: makeUTCDate(year: 2019, month: 3, day: 10, hour: 22, minute: 51, second: 26, microsecond: 490164),
                 passedAt: makeUTCDate(year: 2019, month: 5, day: 29, hour: 23, minute: 8, second: 8, microsecond: 250981),
                 burnedAt: nil,
                 availableAt: makeUTCDate(year: 2019, month: 6, day: 5, hour: 22),
                 resurrectedAt: nil,
-                isPassed: true,
-                isResurrected: false,
                 isHidden: false))
         
         XCTAssertEqual(resource, expected)

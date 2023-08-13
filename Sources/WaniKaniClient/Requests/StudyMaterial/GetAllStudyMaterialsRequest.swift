@@ -1,10 +1,16 @@
 import Foundation
 
+/// Returns a collection of all study material, ordered by ascending ``StudyMaterialResourceData/createdAt``, 500 at a time.
 public struct GetAllStudyMaterialsRequest {
+    /// Return study materials with a matching value in ``StudyMaterialResourceData/isHidden``.
     public var isHidden: Bool?
+    /// Only study material records where ``StudyMaterialResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Only study material records where ``StudyMaterialResourceData/subjectID`` matches one of the array values are returned.
     public var subjectIDs: [Int]?
+    /// Only study material records where ``StudyMaterialResourceData/subjectType`` matches one of the array values are returned.
     public var subjectTypes: [SubjectType]?
+    /// Only study material records updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(isHidden: Bool? = nil,

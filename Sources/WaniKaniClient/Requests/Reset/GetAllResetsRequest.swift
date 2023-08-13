@@ -1,7 +1,10 @@
 import Foundation
 
+/// Returns a collection of all resets, ordered by ascending ``ResetResourceData/createdAt``, 500 at a time.
 public struct GetAllResetsRequest {
+    /// Only resets where ``ResetResource/id`` matches one of the array values are returned.
     public var ids: [Int]?
+    /// Only resets updated after this time are returned.
     public var updatedAfter: Date?
     
     public init(ids: [Int]? = nil,

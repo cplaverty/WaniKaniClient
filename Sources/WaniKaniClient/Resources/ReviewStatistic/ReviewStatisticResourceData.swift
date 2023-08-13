@@ -1,18 +1,38 @@
 import Foundation
 
+/// Review statistic resource data.
 public struct ReviewStatisticResourceData: Codable, Equatable {
+    /// Timestamp when the review statistic was created.
     public var createdAt: Date
+    /// Unique identifier of the associated ``SubjectResource``.
     public var subjectID: Int
+    /// The type of the associated ``SubjectResource``.
     public var subjectType: SubjectType
+    /// Total number of correct answers submitted for the meaning of the associated subject.
     public var meaningCorrect: Int
+    /// Total number of incorrect answers submitted for the meaning of the associated subject.
     public var meaningIncorrect: Int
+    /// The longest, uninterrupted series of correct answers ever given for the meaning of the associated subject.
     public var meaningMaxStreak: Int
+    /// The current, uninterrupted series of correct answers given for the meaning of the associated subject.
     public var meaningCurrentStreak: Int
+    /// Total number of correct answers submitted for the reading of the associated subject.
     public var readingCorrect: Int
+    /// Total number of incorrect answers submitted for the reading of the associated subject.
     public var readingIncorrect: Int
+    /// The longest, uninterrupted series of correct answers ever given for the reading of the associated subject.
     public var readingMaxStreak: Int
+    /// The current, uninterrupted series of correct answers given for the reading of the associated subject.
     public var readingCurrentStreak: Int
+    /// The overall correct answer rate by the user for the subject, including both meaning and reading.
+    ///
+    /// Percentage correct can be calculated by rounding the result of
+    /// (
+    ///     (``meaningCorrect`` + ``readingCorrect``) /
+    ///     (``meaningCorrect``  + ``readingCorrect`` + ``meaningIncorrect`` + ``readingIncorrect``)
+    /// ) * 100
     public var percentageCorrect: Int
+    /// Indicates if the associated subject has been hidden, preventing it from appearing in lessons or reviews.
     public var isHidden: Bool
     
     public init(createdAt: Date,

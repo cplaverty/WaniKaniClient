@@ -1,5 +1,6 @@
 import Foundation
 
+/// Returns a summary of user information.
 public struct GetUserRequest {
     public init() {
     }

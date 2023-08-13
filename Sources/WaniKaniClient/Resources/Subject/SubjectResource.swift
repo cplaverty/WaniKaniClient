@@ -1,13 +1,20 @@
 import Foundation
 
+/// Subjects are the radicals, kanji, vocabulary, and kana vocabulary that are learned through lessons and reviews.
+/// They contain basic dictionary information, such as meanings and/or readings, and information about their
+/// relationship to other items with WaniKani, like their level.
 public struct SubjectResource: WaniKaniResource {
+    /// Unique identifier of the subject.
     public var id: Int
+    /// The kind of object returned.
     public private(set) var objectType: ResourceObjectType
+    /// The URL of the request.
     public var url: URL
+    /// The last time that particular resource was updated.
     public var dataUpdatedAt: Date
-    public private(set) var data: SubjectResourceData
+    public private(set) var data: SubjectResourceDataType
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: RadicalResource) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: RadicalResourceData) {
         self.id = id
         self.objectType = .radical
         self.url = url
@@ -15,7 +22,7 @@ public struct SubjectResource: WaniKaniResource {
         self.data = .radical(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: KanjiResource) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: KanjiResourceData) {
         self.id = id
         self.objectType = .kanji
         self.url = url
@@ -23,7 +30,7 @@ public struct SubjectResource: WaniKaniResource {
         self.data = .kanji(data)
     }
     
-    public init(id: Int, url: URL, dataUpdatedAt: Date, data: VocabularyResource) {
+    public init(id: Int, url: URL, dataUpdatedAt: Date, data: VocabularyResourceData) {
         self.id = id
         self.objectType = .vocabulary
         self.url = url
@@ -66,14 +73,14 @@ public struct SubjectResource: WaniKaniResource {
 }
 
 private extension KeyedDecodingContainerProtocol {
-    func decodeResource(of type: ResourceObjectType, forKey key: Key) throws -> SubjectResourceData {
+    func decodeResource(of type: ResourceObjectType, forKey key: Key) throws -> SubjectResourceDataType {
         switch type {
         case .radical:
-            return .radical(try decode(RadicalResource.self, forKey: key))
+            return .radical(try decode(RadicalResourceData.self, forKey: key))
         case .kanji:
-            return .kanji(try decode(KanjiResource.self, forKey: key))
+            return .kanji(try decode(KanjiResourceData.self, forKey: key))
         case .vocabulary:
-            return .vocabulary(try decode(VocabularyResource.self, forKey: key))
+            return .vocabulary(try decode(VocabularyResourceData.self, forKey: key))
         default:
             throw DecodingError.dataCorruptedError(forKey: key, in: self, debugDescription: "Invalid subject type \(type)")
         }

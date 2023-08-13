@@ -1,6 +1,8 @@
 import Foundation
 
+/// Retrieves a specific review by its ``ReviewResource/id``.
 public struct GetReviewRequest {
+    /// Unique identifier of the review.
     public var id: Int
     
     public init(id: Int) {

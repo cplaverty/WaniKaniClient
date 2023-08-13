@@ -1,6 +1,8 @@
 import Foundation
 
+/// Retrieves a specific subject by its ``SubjectResource/id``.
 public struct GetSubjectRequest {
+    /// Unique identifier of the subject.
     public var id: Int
     
     public init(id: Int) {
