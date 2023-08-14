@@ -14,9 +14,9 @@ final class RadicalResourceDataTests: XCTestCase {
         let expected = SubjectResource(
             id: 1,
             url: URL(string: "https://api.wanikani.com/v2/subjects/1")!,
-            dataUpdatedAt: makeUTCDate(year: 2023, month: 7, day: 26, hour: 17, minute: 46, second: 22, microsecond: 746541),
+            dataUpdatedAt: Date.makeUTC(year: 2023, month: 7, day: 26, hour: 17, minute: 46, second: 22, microsecond: 746541),
             data: RadicalResourceData(
-                createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 18, minute: 8, second: 16),
+                createdAt: Date.makeUTC(year: 2012, month: 2, day: 27, hour: 18, minute: 8, second: 16),
                 level: 1,
                 slug: "ground",
                 hiddenAt: nil,

@@ -24,7 +24,7 @@ final class GetAllSpacedRepetitionSystemsRequestTests: XCTestCase {
         // DateFormatter only has millisecond precision
         let expected = URL(string: "spaced_repetition_systems?updated_after=2021-03-01T18:10:34.873Z", relativeTo: baseURL)!.absoluteURL
         
-        let request = GetAllSpacedRepetitionSystemsRequest(updatedAfter: makeUTCDate(year: 2021, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
+        let request = GetAllSpacedRepetitionSystemsRequest(updatedAfter: Date.makeUTC(year: 2021, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
         XCTAssertEqual(request.requestURL, expected)
     }

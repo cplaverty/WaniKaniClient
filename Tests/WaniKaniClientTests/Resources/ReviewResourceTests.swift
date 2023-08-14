@@ -14,9 +14,9 @@ final class ReviewResourceTests: XCTestCase {
         let expected = ReviewResource(
             id: 18039639,
             url: URL(string: "https://api.wanikani.com/v2/reviews/18039639")!,
-            dataUpdatedAt: makeUTCDate(year: 2017, month: 8, day: 28, hour: 20, minute: 31, second: 36, microsecond: 211731),
+            dataUpdatedAt: Date.makeUTC(year: 2017, month: 8, day: 28, hour: 20, minute: 31, second: 36, microsecond: 211731),
             data: ReviewResourceData(
-                createdAt: makeUTCDate(year: 2017, month: 8, day: 28, hour: 20, minute: 31, second: 36, microsecond: 211731),
+                createdAt: Date.makeUTC(year: 2017, month: 8, day: 28, hour: 20, minute: 31, second: 36, microsecond: 211731),
                 assignmentID: 77901970,
                 spacedRepetitionSystemID: 1,
                 subjectID: 25,

@@ -53,7 +53,7 @@ final class WaniKaniClientTests: XCTestCase {
                 url: requestURL,
                 pages: ResourceCollectionPages(itemsPerPage: 1),
                 totalCount: 1,
-                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                dataUpdatedAt: Date.makeUTC(year: 2019, month: 1, day: 1),
                 data: [TestResource(id: 1, data: TestResourceData(string: "content"))])
         ]
         
@@ -98,13 +98,13 @@ final class WaniKaniClientTests: XCTestCase {
                 url: requestURL,
                 pages: ResourceCollectionPages(itemsPerPage: 1, nextURL: requestURLPage2),
                 totalCount: 2,
-                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                dataUpdatedAt: Date.makeUTC(year: 2019, month: 1, day: 1),
                 data: [TestResource(id: 1, data: TestResourceData(string: "content"))]),
             ResourceCollection(
                 url: requestURLPage2,
                 pages: ResourceCollectionPages(itemsPerPage: 1, previousURL: requestURL),
                 totalCount: 2,
-                dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+                dataUpdatedAt: Date.makeUTC(year: 2019, month: 1, day: 1),
                 data: [TestResource(id: 2, data: TestResourceData(string: "content2"))])
         ]
         
@@ -145,7 +145,7 @@ final class WaniKaniClientTests: XCTestCase {
             url: requestURL,
             pages: ResourceCollectionPages(itemsPerPage: 1, nextURL: requestURLPage2),
             totalCount: 3,
-            dataUpdatedAt: makeUTCDate(year: 2019, month: 1, day: 1),
+            dataUpdatedAt: Date.makeUTC(year: 2019, month: 1, day: 1),
             data: [TestResource(id: 1, data: TestResourceData(string: "content"))])
         
         let urlSession = makeURLSession()

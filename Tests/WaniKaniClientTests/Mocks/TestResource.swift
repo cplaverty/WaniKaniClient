@@ -16,7 +16,7 @@ extension TestResource: WaniKaniResource {
     }
     
     var dataUpdatedAt: Date {
-        return makeUTCDate(year: 2000, month: 1, day: 1)
+        return Date.makeUTC(year: 2000, month: 1, day: 1)
     }
 }
 

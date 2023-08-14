@@ -14,9 +14,9 @@ final class KanjiResourceDataTests: XCTestCase {
         let expected = SubjectResource(
             id: 440,
             url: URL(string: "https://api.wanikani.com/v2/subjects/440")!,
-            dataUpdatedAt: makeUTCDate(year: 2023, month: 7, day: 10, hour: 18, minute: 28, second: 29, microsecond: 180338),
+            dataUpdatedAt: Date.makeUTC(year: 2023, month: 7, day: 10, hour: 18, minute: 28, second: 29, microsecond: 180338),
             data: KanjiResourceData(
-                createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 19, minute: 55, second: 19),
+                createdAt: Date.makeUTC(year: 2012, month: 2, day: 27, hour: 19, minute: 55, second: 19),
                 level: 1,
                 slug: "一",
                 hiddenAt: nil,

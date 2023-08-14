@@ -14,9 +14,9 @@ final class VocabularyResourceDataTests: XCTestCase {
         let expected = SubjectResource(
             id: 2467,
             url: URL(string: "https://api.wanikani.com/v2/subjects/2467")!,
-            dataUpdatedAt: makeUTCDate(year: 2023, month: 8, day: 12, hour: 5, minute: 5, second: 10, microsecond: 904541),
+            dataUpdatedAt: Date.makeUTC(year: 2023, month: 8, day: 12, hour: 5, minute: 5, second: 10, microsecond: 904541),
             data: VocabularyResourceData(
-                createdAt: makeUTCDate(year: 2012, month: 2, day: 28, hour: 8, minute: 4, second: 47),
+                createdAt: Date.makeUTC(year: 2012, month: 2, day: 28, hour: 8, minute: 4, second: 47),
                 level: 1,
                 slug: "一",
                 hiddenAt: nil,

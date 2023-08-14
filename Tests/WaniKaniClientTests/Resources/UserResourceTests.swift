@@ -13,19 +13,19 @@ final class UserResourceTests: XCTestCase {
         
         let expected = UserResource(
             url: URL(string: "https://api.wanikani.com/v2/user")!,
-            dataUpdatedAt: makeUTCDate(year: 2019, month: 6, day: 26, hour: 19, minute: 43, second: 27, microsecond: 724385),
+            dataUpdatedAt: Date.makeUTC(year: 2019, month: 6, day: 26, hour: 19, minute: 43, second: 27, microsecond: 724385),
             data: UserResourceData(
                 id: "7d1742c5-c493-444b-97ae-c495bec9d850",
                 username: "testUser",
                 level: 24,
                 profileURL: URL(string: "https://www.wanikani.com/users/testUser")!,
-                startedAt: makeUTCDate(year: 2014, month: 6, day: 12, hour: 7, minute: 40, second: 29, microsecond: 462981),
+                startedAt: Date.makeUTC(year: 2014, month: 6, day: 12, hour: 7, minute: 40, second: 29, microsecond: 462981),
                 currentVacationStartedAt: nil,
                 subscription: UserSubscription(
                     isActive: true,
                     type: .recurring,
                     maxLevelGranted: 60,
-                    periodEndsAt: makeUTCDate(year: 2020, month: 6, day: 12, hour: 7, minute: 40, second: 29)),
+                    periodEndsAt: Date.makeUTC(year: 2020, month: 6, day: 12, hour: 7, minute: 40, second: 29)),
                 preferences: UserPreferences(
                     defaultVoiceActorID: 2,
                     extraStudyAutoplayAudio: false,

@@ -14,9 +14,9 @@ final class KanaVocabularyResourceDataTests: XCTestCase {
         let expected = SubjectResource(
             id: 9210,
             url: URL(string: "https://api.wanikani.com/v2/subjects/9210")!,
-            dataUpdatedAt: makeUTCDate(year: 2023, month: 7, day: 25, hour: 14, minute: 50, second: 24, microsecond: 213631),
+            dataUpdatedAt: Date.makeUTC(year: 2023, month: 7, day: 25, hour: 14, minute: 50, second: 24, microsecond: 213631),
             data: KanaVocabularyResourceData(
-                createdAt: makeUTCDate(year: 2023, month: 4, day: 24, hour: 23, minute: 52, second: 43, microsecond: 457614),
+                createdAt: Date.makeUTC(year: 2023, month: 4, day: 24, hour: 23, minute: 52, second: 43, microsecond: 457614),
                 level: 8,
                 slug: "おやつ",
                 hiddenAt: nil,

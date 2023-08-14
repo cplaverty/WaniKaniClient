@@ -14,9 +14,9 @@ final class VoiceActorResourceTests: XCTestCase {
         let expected = VoiceActorResource(
             id: 1,
             url: URL(string: "https://api.wanikani.com/v2/voice_actors/1")!,
-            dataUpdatedAt: makeUTCDate(year: 2023, month: 8, day: 3, hour: 17, minute: 29, second: 35, microsecond: 292698),
+            dataUpdatedAt: Date.makeUTC(year: 2023, month: 8, day: 3, hour: 17, minute: 29, second: 35, microsecond: 292698),
             data: VoiceActorResourceData(
-                createdAt: makeUTCDate(year: 2018, month: 9, day: 11, hour: 18, minute: 30, second: 27, microsecond: 96474),
+                createdAt: Date.makeUTC(year: 2018, month: 9, day: 11, hour: 18, minute: 30, second: 27, microsecond: 96474),
                 name: "Kyoko",
                 gender: .female,
                 description: "Tokyo accent"))

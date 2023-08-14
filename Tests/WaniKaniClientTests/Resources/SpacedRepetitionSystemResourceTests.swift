@@ -14,9 +14,9 @@ final class SpacedRepetitionSystemResourceTests: XCTestCase {
         let expected = SpacedRepetitionSystemResource(
             id: 1,
             url: URL(string: "https://api.wanikani.com/v2/spaced_repetition_systems/1")!,
-            dataUpdatedAt: makeUTCDate(year: 2020, month: 6, day: 9, hour: 3, minute: 36, second: 51, microsecond: 134752),
+            dataUpdatedAt: Date.makeUTC(year: 2020, month: 6, day: 9, hour: 3, minute: 36, second: 51, microsecond: 134752),
             data: SpacedRepetitionSystemResourceData(
-                createdAt: makeUTCDate(year: 2020, month: 5, day: 21, hour: 20, minute: 46, second: 6, microsecond: 464460),
+                createdAt: Date.makeUTC(year: 2020, month: 5, day: 21, hour: 20, minute: 46, second: 6, microsecond: 464460),
                 name: "Default system for dictionary subjects",
                 description: "The original spaced repetition system",
                 unlockingStagePosition: 0,

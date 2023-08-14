@@ -16,7 +16,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         // DateFormatter only has millisecond precision
         let expected = URL(string: "assignments?available_after=2019-09-03T14:15:30.327Z", relativeTo: baseURL)!.absoluteURL
         
-        let request = GetAllAssignmentsRequest(availableAfter: makeUTCDate(year: 2019, month: 9, day: 3, hour: 14, minute: 15, second: 30, microsecond: 327509))
+        let request = GetAllAssignmentsRequest(availableAfter: Date.makeUTC(year: 2019, month: 9, day: 3, hour: 14, minute: 15, second: 30, microsecond: 327509))
         
         XCTAssertEqual(request.requestURL, expected)
     }
@@ -25,7 +25,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         // DateFormatter only has millisecond precision
         let expected = URL(string: "assignments?available_before=2019-08-05T22:26:54.548Z", relativeTo: baseURL)!.absoluteURL
         
-        let request = GetAllAssignmentsRequest(availableBefore: makeUTCDate(year: 2019, month: 8, day: 5, hour: 22, minute: 26, second: 54, microsecond: 548723))
+        let request = GetAllAssignmentsRequest(availableBefore: Date.makeUTC(year: 2019, month: 8, day: 5, hour: 22, minute: 26, second: 54, microsecond: 548723))
         
         XCTAssertEqual(request.requestURL, expected)
     }
@@ -130,7 +130,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         // DateFormatter only has millisecond precision
         let expected = URL(string: "assignments?updated_after=2019-03-01T18:10:34.873Z", relativeTo: baseURL)!.absoluteURL
         
-        let request = GetAllAssignmentsRequest(updatedAfter: makeUTCDate(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
+        let request = GetAllAssignmentsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
         XCTAssertEqual(request.requestURL, expected)
     }

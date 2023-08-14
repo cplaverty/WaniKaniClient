@@ -24,7 +24,7 @@ final class GetAllLevelProgressionsRequestTests: XCTestCase {
         // DateFormatter only has millisecond precision
         let expected = URL(string: "level_progressions?updated_after=2019-03-01T18:10:34.873Z", relativeTo: baseURL)!.absoluteURL
         
-        let request = GetAllLevelProgressionsRequest(updatedAfter: makeUTCDate(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
+        let request = GetAllLevelProgressionsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
         XCTAssertEqual(request.requestURL, expected)
     }

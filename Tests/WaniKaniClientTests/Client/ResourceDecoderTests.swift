@@ -13,7 +13,7 @@ final class ResourceDecoderTests: XCTestCase {
         
         let expected = TestResource(
             id: 1,
-            data: TestResourceData(date: makeUTCDate(year: 2018, month: 1, day: 4, hour: 8, minute: 31, second: 35, microsecond: 325623)))
+            data: TestResourceData(date: Date.makeUTC(year: 2018, month: 1, day: 4, hour: 8, minute: 31, second: 35, microsecond: 325623)))
         
         XCTAssertEqual(resource, expected)
     }

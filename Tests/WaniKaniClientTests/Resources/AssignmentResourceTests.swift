@@ -14,17 +14,17 @@ final class AssignmentResourceTests: XCTestCase {
         let expected = AssignmentResource(
             id: 79854763,
             url: URL(string: "https://api.wanikani.com/v2/assignments/79854763")!,
-            dataUpdatedAt: makeUTCDate(year: 2019, month: 5, day: 29, hour: 23, minute: 8, second: 8, microsecond: 254118),
+            dataUpdatedAt: Date.makeUTC(year: 2019, month: 5, day: 29, hour: 23, minute: 8, second: 8, microsecond: 254118),
             data: AssignmentResourceData(
-                createdAt: makeUTCDate(year: 2017, month: 8, day: 30, hour: 22, minute: 41, second: 46, microsecond: 796284),
+                createdAt: Date.makeUTC(year: 2017, month: 8, day: 30, hour: 22, minute: 41, second: 46, microsecond: 796284),
                 subjectID: 442,
                 subjectType: .kanji,
                 srsStage: 5,
-                unlockedAt: makeUTCDate(year: 2019, month: 2, day: 24, hour: 22, minute: 51, second: 46, microsecond: 976224),
-                startedAt: makeUTCDate(year: 2019, month: 3, day: 10, hour: 22, minute: 51, second: 26, microsecond: 490164),
-                passedAt: makeUTCDate(year: 2019, month: 5, day: 29, hour: 23, minute: 8, second: 8, microsecond: 250981),
+                unlockedAt: Date.makeUTC(year: 2019, month: 2, day: 24, hour: 22, minute: 51, second: 46, microsecond: 976224),
+                startedAt: Date.makeUTC(year: 2019, month: 3, day: 10, hour: 22, minute: 51, second: 26, microsecond: 490164),
+                passedAt: Date.makeUTC(year: 2019, month: 5, day: 29, hour: 23, minute: 8, second: 8, microsecond: 250981),
                 burnedAt: nil,
-                availableAt: makeUTCDate(year: 2019, month: 6, day: 5, hour: 22),
+                availableAt: Date.makeUTC(year: 2019, month: 6, day: 5, hour: 22),
                 resurrectedAt: nil,
                 isHidden: false))
         

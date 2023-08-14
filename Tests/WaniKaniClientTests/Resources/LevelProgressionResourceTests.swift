@@ -14,15 +14,15 @@ final class LevelProgressionResourceTests: XCTestCase {
         let expected = LevelProgressionResource(
             id: 3887,
             url: URL(string: "https://api.wanikani.com/v2/level_progressions/3887")!,
-            dataUpdatedAt: makeUTCDate(year: 2019, month: 2, day: 22, hour: 20, minute: 8, second: 24, microsecond: 387434),
+            dataUpdatedAt: Date.makeUTC(year: 2019, month: 2, day: 22, hour: 20, minute: 8, second: 24, microsecond: 387434),
             data: LevelProgressionResourceData(
                 level: 2,
-                createdAt: makeUTCDate(year: 2017, month: 9, day: 27, hour: 22, minute: 42, second: 48, microsecond: 841037),
-                unlockedAt: makeUTCDate(year: 2017, month: 9, day: 3, hour: 20, minute: 57, second: 54, microsecond: 752226),
-                startedAt: makeUTCDate(year: 2017, month: 9, day: 3, hour: 20, minute: 59, second: 40, microsecond: 499874),
+                createdAt: Date.makeUTC(year: 2017, month: 9, day: 27, hour: 22, minute: 42, second: 48, microsecond: 841037),
+                unlockedAt: Date.makeUTC(year: 2017, month: 9, day: 3, hour: 20, minute: 57, second: 54, microsecond: 752226),
+                startedAt: Date.makeUTC(year: 2017, month: 9, day: 3, hour: 20, minute: 59, second: 40, microsecond: 499874),
                 passedAt: nil,
                 completedAt: nil,
-                abandonedAt: makeUTCDate(year: 2019, month: 2, day: 22, hour: 20, minute: 8, second: 24, microsecond: 380546)))
+                abandonedAt: Date.makeUTC(year: 2019, month: 2, day: 22, hour: 20, minute: 8, second: 24, microsecond: 380546)))
         
         XCTAssertEqual(resource, expected)
     }

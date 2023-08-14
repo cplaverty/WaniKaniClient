@@ -14,12 +14,12 @@ final class ResetResourceTests: XCTestCase {
         let expected = ResetResource(
             id: 1953,
             url: URL(string: "https://api.wanikani.com/v2/resets/1953")!,
-            dataUpdatedAt: makeUTCDate(year: 2017, month: 8, day: 10, hour: 18, minute: 55, second: 10, microsecond: 886050),
+            dataUpdatedAt: Date.makeUTC(year: 2017, month: 8, day: 10, hour: 18, minute: 55, second: 10, microsecond: 886050),
             data: ResetResourceData(
-                createdAt: makeUTCDate(year: 2017, month: 8, day: 10, hour: 18, minute: 53, second: 51, microsecond: 328781),
+                createdAt: Date.makeUTC(year: 2017, month: 8, day: 10, hour: 18, minute: 53, second: 51, microsecond: 328781),
                 originalLevel: 2,
                 targetLevel: 1,
-                confirmedAt: makeUTCDate(year: 2017, month: 8, day: 10, hour: 18, minute: 54, second: 56, microsecond: 574440)))
+                confirmedAt: Date.makeUTC(year: 2017, month: 8, day: 10, hour: 18, minute: 54, second: 56, microsecond: 574440)))
         
         XCTAssertEqual(resource, expected)
     }

@@ -14,9 +14,9 @@ final class ReviewStatisticResourceTests: XCTestCase {
         let expected = ReviewStatisticResource(
             id: 30215722,
             url: URL(string: "https://api.wanikani.com/v2/review_statistics/30215722")!,
-            dataUpdatedAt: makeUTCDate(year: 2017, month: 5, day: 17, hour: 18, minute: 10, second: 45, microsecond: 384058),
+            dataUpdatedAt: Date.makeUTC(year: 2017, month: 5, day: 17, hour: 18, minute: 10, second: 45, microsecond: 384058),
             data: ReviewStatisticResourceData(
-                createdAt: makeUTCDate(year: 2015, month: 7, day: 9, hour: 18, minute: 8, second: 16, microsecond: 965550),
+                createdAt: Date.makeUTC(year: 2015, month: 7, day: 9, hour: 18, minute: 8, second: 16, microsecond: 965550),
                 subjectID: 450,
                 subjectType: .kanji,
                 meaningCorrect: 11,

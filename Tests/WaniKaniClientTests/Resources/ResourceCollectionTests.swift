@@ -18,7 +18,7 @@ final class ResourceCollectionTests: XCTestCase {
                 nextURL: URL(string: "https://api.wanikani.com/v2/test_resource?page_after_id=4")!,
                 previousURL: nil),
             totalCount: 10,
-            dataUpdatedAt: makeUTCDate(year: 2019, month: 6, day: 23, hour: 19, minute: 22, second: 33, microsecond: 18206),
+            dataUpdatedAt: Date.makeUTC(year: 2019, month: 6, day: 23, hour: 19, minute: 22, second: 33, microsecond: 18206),
             data: [
                 TestResource(id: 1, data: TestResourceData(string: "test1")),
                 TestResource(id: 2, data: TestResourceData(string: "test2")),

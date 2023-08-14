@@ -14,9 +14,9 @@ final class StudyMaterialResourceTests: XCTestCase {
         let expected = StudyMaterialResource(
             id: 204431,
             url: URL(string: "https://api.wanikani.com/v2/study_materials/204431")!,
-            dataUpdatedAt: makeUTCDate(year: 2017, month: 5, day: 13, hour: 14, minute: 36, second: 4, microsecond: 493113),
+            dataUpdatedAt: Date.makeUTC(year: 2017, month: 5, day: 13, hour: 14, minute: 36, second: 4, microsecond: 493113),
             data: StudyMaterialResourceData(
-                createdAt: makeUTCDate(year: 2015, month: 7, day: 7, hour: 16, minute: 41, second: 2, microsecond: 579373),
+                createdAt: Date.makeUTC(year: 2015, month: 7, day: 7, hour: 16, minute: 41, second: 2, microsecond: 579373),
                 subjectID: 25,
                 subjectType: .radical,
                 meaningNote: "meaning note",
