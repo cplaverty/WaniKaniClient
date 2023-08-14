@@ -1,7 +1,7 @@
 import Foundation
 @testable import WaniKaniClient
 
-struct TestCollectionRequest: ResourceCollectionGetRequest {
+struct GetAllTestsRequest: ResourceCollectionGetRequest {
     typealias Resource = TestResource
     
     let requestURL: URL

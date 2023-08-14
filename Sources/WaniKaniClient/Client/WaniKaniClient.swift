@@ -16,13 +16,13 @@ public final class WaniKaniClient: ResourceRequestClient {
         urlSession.invalidateAndCancel()
     }
     
-    public func loadRequest<Request: ResourceGetRequest>(_ request: Request) async throws -> Request.Resource {
+    public func resource<Request: ResourceGetRequest>(for request: Request) async throws -> Request.Resource {
         let resource = try await loadResource(Request.Resource.self, from: request.requestURL)
         logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
         return resource
     }
     
-    public func loadCollectionRequest<Request: ResourceCollectionGetRequest>(_ request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
+    public func resources<Request: ResourceCollectionGetRequest>(for request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {

@@ -8,7 +8,7 @@ final class WaniKaniClientTests: XCTestCase {
         MockURLProtocol.requestHandler.removeAll()
     }
     
-    func testLoadRequest() async throws {
+    func testGetResource() async throws {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -27,7 +27,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+            let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
             XCTAssertEqual(resource, expected)
             
             expect.fulfill()
@@ -36,7 +36,7 @@ final class WaniKaniClientTests: XCTestCase {
         await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestSinglePage() async throws {
+    func testGetResourceCollectionSinglePage() async throws {
         let requestURL = URL(string: "test://test-resources")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
@@ -62,7 +62,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resources = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+            let resources = try await client.resources(for: GetAllTestsRequest(requestURL: requestURL))
                 .reduce(into: [], { $0.append($1) })
             XCTAssertEqual(resources, expected)
             
@@ -72,7 +72,7 @@ final class WaniKaniClientTests: XCTestCase {
         await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestMultiplePage() async throws {
+    func testGetResourceCollectionMultiplePages() async throws {
         let requestURL = URL(string: "test://test-resources")!
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
@@ -113,7 +113,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resources = try await client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL))
+            let resources = try await client.resources(for: GetAllTestsRequest(requestURL: requestURL))
                 .reduce(into: [], { $0.append($1) })
             XCTAssertEqual(resources, expected)
             
@@ -123,7 +123,7 @@ final class WaniKaniClientTests: XCTestCase {
         await fulfillment(of: [expect], timeout: 3)
     }
     
-    func testLoadCollectionRequestMultiplePageErrorWithPartialResult() async throws {
+    func testGetResourceCollectionMultiplePagesThrowsErrorWithPartialResult() async throws {
         let requestURL = URL(string: "test://test-resources")!
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
@@ -153,7 +153,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            var iter = client.loadCollectionRequest(TestCollectionRequest(requestURL: requestURL)).makeAsyncIterator()
+            var iter = client.resources(for: GetAllTestsRequest(requestURL: requestURL)).makeAsyncIterator()
             
             let first = try await iter.next()
             XCTAssertEqual(first, expected)
@@ -191,7 +191,7 @@ final class WaniKaniClientTests: XCTestCase {
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
             do {
-                let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+                let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
             } catch WaniKaniClientError.invalidAPIKey {
                 // Expected error
@@ -223,7 +223,7 @@ final class WaniKaniClientTests: XCTestCase {
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
             do {
-                let resource = try await client.loadRequest(TestRequest(requestURL: requestURL))
+                let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
             } catch WaniKaniClientError.apiError(let error, let code) {
                 XCTAssertEqual(error, "Not found", "Unexpected error message")
