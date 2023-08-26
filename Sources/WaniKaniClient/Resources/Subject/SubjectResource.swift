@@ -7,12 +7,12 @@ public struct SubjectResource: WaniKaniResource {
     /// Unique identifier of the subject.
     public var id: Int
     /// The kind of object returned.
-    public private(set) var objectType: ResourceObjectType
+    public var objectType: ResourceObjectType
     /// The URL of the request.
     public var url: URL
     /// The last time that particular resource was updated.
     public var dataUpdatedAt: Date
-    public private(set) var data: SubjectResourceDataType
+    public var data: SubjectResourceDataType
     
     public init(id: Int, url: URL, dataUpdatedAt: Date, data: RadicalResourceData) {
         self.id = id
@@ -53,24 +53,6 @@ public struct SubjectResource: WaniKaniResource {
         url = try container.decode(URL.self, forKey: .url)
         dataUpdatedAt = try container.decode(Date.self, forKey: .dataUpdatedAt)
         data = try container.decodeResource(of: objectType, forKey: .data)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(objectType, forKey: .objectType)
-        try container.encode(url, forKey: .url)
-        try container.encode(dataUpdatedAt, forKey: .dataUpdatedAt)
-        switch data {
-        case let .radical(r):
-            try container.encode(r, forKey: .data)
-        case let .kanji(k):
-            try container.encode(k, forKey: .data)
-        case let .vocabulary(v):
-            try container.encode(v, forKey: .data)
-        case let .kanaVocabulary(v):
-            try container.encode(v, forKey: .data)
-        }
     }
     
     private enum CodingKeys: String, CodingKey {
