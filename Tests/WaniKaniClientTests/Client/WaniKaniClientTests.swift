@@ -12,7 +12,7 @@ final class WaniKaniClientTests: XCTestCase {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
@@ -40,7 +40,7 @@ final class WaniKaniClientTests: XCTestCase {
         let requestURL = URL(string: "test://test-resources")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
@@ -77,7 +77,7 @@ final class WaniKaniClientTests: XCTestCase {
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
@@ -85,7 +85,7 @@ final class WaniKaniClientTests: XCTestCase {
             return (response, testData)
         }
         MockURLProtocol.requestHandler[requestURLPage2] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
@@ -128,7 +128,7 @@ final class WaniKaniClientTests: XCTestCase {
         let requestURLPage2 = URL(string: "test://test-resources?page=2")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             
@@ -136,7 +136,7 @@ final class WaniKaniClientTests: XCTestCase {
             return (response, testData)
         }
         MockURLProtocol.requestHandler[requestURLPage2] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             throw URLError(.notConnectedToInternet)
         }
@@ -173,11 +173,53 @@ final class WaniKaniClientTests: XCTestCase {
         await fulfillment(of: [expect], timeout: 3)
     }
     
+    func testUpdateResource() async throws {
+        let requestURL = URL(string: "test://test-resources/1")!
+        
+        let expectedHTTPMethod = "POST"
+        let expectedHTTPBody = #"{"string":"new content"}"#
+        
+        MockURLProtocol.requestHandler[requestURL] = { request in
+            self.verifyHeadersForUpdateRequest(request)
+            XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
+            if let httpBodyData = request.httpBody {
+                let httpBody = String(data: httpBodyData, encoding: .utf8)
+                XCTAssertEqual(httpBody, expectedHTTPBody)
+            } else if let httpBodyStream = request.httpBodyStream {
+                let httpBodyData = try Data(reading: httpBodyStream)
+                let httpBody = String(data: httpBodyData, encoding: .utf8)
+                XCTAssertEqual(httpBody, expectedHTTPBody)
+            } else {
+                XCTFail("Empty request body")
+            }
+            
+            let response = HTTPURLResponse(url: request.url!, statusCode: 201, httpVersion: nil, headerFields: nil)!
+            
+            let testData = #"{"id":1,"data":\#(expectedHTTPBody)}"#.data(using: .utf8)!
+            return (response, testData)
+        }
+        
+        let expected = TestResource(id: 1, data: TestResourceData(string: "new content"))
+        
+        let urlSession = makeURLSession()
+        
+        let expect = expectation(description: "request")
+        let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
+        Task {
+            let resource = try await client.updateResource(for: UpdateTestRequest(requestURL: requestURL, updated: expected))
+            XCTAssertEqual(resource, expected)
+            
+            expect.fulfill()
+        }
+        
+        await fulfillment(of: [expect], timeout: 3)
+    }
+    
     func testUnauthorized() async throws {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 401, httpVersion: nil, headerFields: nil)!
             
@@ -209,7 +251,7 @@ final class WaniKaniClientTests: XCTestCase {
         let requestURL = URL(string: "test://test-resources/1")!
         
         MockURLProtocol.requestHandler[requestURL] = { request in
-            self.verifyHeadersForRequest(request)
+            self.verifyHeadersForGetRequest(request)
             
             let response = HTTPURLResponse(url: request.url!, statusCode: 404, httpVersion: nil, headerFields: nil)!
             
@@ -244,11 +286,28 @@ final class WaniKaniClientTests: XCTestCase {
         return URLSession(configuration: configuration)
     }
     
-    private func verifyHeadersForRequest(_ request: URLRequest) {
+    private func verifyHeadersForGetRequest(_ request: URLRequest) {
         let authorizationHeaderValue = request.value(forHTTPHeaderField: "Authorization")
         XCTAssertEqual(authorizationHeaderValue, "Bearer \(apiKey)", "Unexpected Authorization header")
         
         let wanikaniRevisionHeaderValue = request.value(forHTTPHeaderField: "Wanikani-Revision")
         XCTAssertEqual(wanikaniRevisionHeaderValue, WaniKaniClient.apiRevision, "Unexpected Wanikani-Revision header")
+        
+        let wanikaniAcceptHeaderValue = request.value(forHTTPHeaderField: "Accept")
+        XCTAssertEqual(wanikaniAcceptHeaderValue, "application/json; charset=utf-8", "Unexpected Accept header")
+    }
+    
+    private func verifyHeadersForUpdateRequest(_ request: URLRequest) {
+        let authorizationHeaderValue = request.value(forHTTPHeaderField: "Authorization")
+        XCTAssertEqual(authorizationHeaderValue, "Bearer \(apiKey)", "Unexpected Authorization header")
+        
+        let wanikaniRevisionHeaderValue = request.value(forHTTPHeaderField: "Wanikani-Revision")
+        XCTAssertEqual(wanikaniRevisionHeaderValue, WaniKaniClient.apiRevision, "Unexpected Wanikani-Revision header")
+        
+        let wanikaniAcceptHeaderValue = request.value(forHTTPHeaderField: "Accept")
+        XCTAssertEqual(wanikaniAcceptHeaderValue, "application/json; charset=utf-8", "Unexpected Accept header")
+        
+        let wanikaniContentTypeHeaderValue = request.value(forHTTPHeaderField: "Content-Type")
+        XCTAssertEqual(wanikaniContentTypeHeaderValue, "application/json; charset=utf-8", "Unexpected Content-Type header")
     }
 }

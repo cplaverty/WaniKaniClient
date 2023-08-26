@@ -9,21 +9,6 @@ public enum WaniKaniClientError: Error {
     case unhandledStatusCode(httpStatusCode: Int, data: Data?)
 }
 
-extension WaniKaniClientError: Decodable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let error = try container.decode(String.self, forKey: .error)
-        let code = try container.decode(Int.self, forKey: .code)
-        
-        self = .apiError(error: error, code: code)
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case error
-        case code
-    }
-}
-
 extension WaniKaniClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -34,7 +19,7 @@ extension WaniKaniClientError: LocalizedError {
         case .tooManyRequests:
             return "Too many requests have been made for this account to the WaniKani API. Please try your request again later."
         case let .apiError(error: error, code: code):
-            return "\(error) (code \(code))"
+            return "Received an error with code \(code) from the API. Message: \(error)"
         case let .unknownError(httpStatusCode: httpStatusCode, message: message):
             return "Received an unexpected response code \(httpStatusCode) from the API. Message: \(message)"
         case let .unhandledStatusCode(httpStatusCode: httpStatusCode, data: _):

@@ -17,7 +17,8 @@ public final class WaniKaniClient: ResourceRequestClient {
     }
     
     public func resource<Request: ResourceGetRequest>(for request: Request) async throws -> Request.Resource {
-        let resource = try await loadResource(Request.Resource.self, from: request.requestURL)
+        let urlRequest = makeURLRequest(url: request.requestURL)
+        let resource = try await decode(Request.Resource.self, for: urlRequest)
         logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
         return resource
     }
@@ -31,7 +32,8 @@ public final class WaniKaniClient: ResourceRequestClient {
                     while let url = nextURL {
                         try Task.checkCancellation()
                         
-                        let resourceCollection = try await loadResource(ResourceCollection<Request.Resource>.self, from: url)
+                        let urlRequest = makeURLRequest(url: url)
+                        let resourceCollection = try await decode(ResourceCollection<Request.Resource>.self, for: urlRequest)
                         logger.log("Loaded collection of \(resourceCollection.data.count) item(s) of type \(Request.Resource.self, privacy: .public)")
                         continuation.yield(resourceCollection)
                         
@@ -48,8 +50,16 @@ public final class WaniKaniClient: ResourceRequestClient {
         }
     }
     
-    private func loadResource<Resource: Codable>(_ type: Resource.Type, from url: URL) async throws -> Resource {
-        let (data, response) = try await data(from: url)
+    public func updateResource<Request: ResourceUpdateRequest>(for request: Request) async throws -> Request.Resource {
+        let urlRequest = try makeURLRequest(url: request.requestURL, httpMethod: request.httpMethod, httpBody: request.bodyContent)
+        let resource = try await decode(Request.Resource.self, for: urlRequest)
+        logger.log("Updated resource of type \(Request.Resource.self, privacy: .public)")
+        return resource
+    }
+    
+    private func decode<Resource: Codable>(_ type: Resource.Type, for urlRequest: URLRequest) async throws -> Resource {
+        logger.info("Initiating request for \(urlRequest.url!, privacy: .public)")
+        let (data, response) = try await urlSession.data(for: urlRequest)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw WaniKaniClientError.invalidServerResponse
@@ -61,7 +71,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         logger.debug("Response: \(httpStatusCode) (\(httpStatusCodeDescription, privacy: .public)), \(data.count, format: .byteCountIEC) received")
         
         switch httpStatusCode {
-        case 200:
+        case 200, 201:
             return try ResourceDecoder.shared.decode(Resource.self, from: data)
         case 401:
             logger.error("API Key \(self.apiKey, privacy: .private(mask: .hash)) was rejected by WK API")
@@ -70,10 +80,10 @@ public final class WaniKaniClient: ResourceRequestClient {
             let resetTime = httpResponse.value(forHTTPHeaderField: "RateLimit-Reset") ?? "<unknown>"
             logger.log("Received 429 (Too Many Requests): rate limit will be reset at \(resetTime, privacy: .public)")
             throw WaniKaniClientError.tooManyRequests
-        case 400 ..< 600:
-            if let error = try? JSONDecoder().decode(WaniKaniClientError.self, from: data) {
-                logger.error("Error message received from WK API: \(error, privacy: .public)")
-                throw error
+        case 400..<600:
+            if let apiError = try? JSONDecoder().decode(WaniKaniAPIError.self, from: data) {
+                logger.error("Error message received from WK API: \(apiError, privacy: .public)")
+                throw WaniKaniClientError.apiError(error: apiError.error, code: apiError.code)
             }
             logger.error("Received HTTP status code \(httpStatusCode) but an unexpected response from the WK server: \(data, privacy: .private)")
             throw WaniKaniClientError.unknownError(httpStatusCode: httpStatusCode, message: httpStatusCodeDescription)
@@ -83,17 +93,20 @@ public final class WaniKaniClient: ResourceRequestClient {
         }
     }
     
-    private func data(from url: URL) async throws -> (Data, URLResponse) {
-        let urlRequest = makeURLRequest(url: url)
-        
-        logger.info("Initiating request for \(url, privacy: .public)")
-        return try await urlSession.data(for: urlRequest)
-    }
-    
     private func makeURLRequest(url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue(Self.apiRevision, forHTTPHeaderField: "Wanikani-Revision")
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+        
+        return urlRequest
+    }
+    
+    private func makeURLRequest(url: URL, httpMethod: String, httpBody: Codable) throws -> URLRequest {
+        var urlRequest = makeURLRequest(url: url)
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = httpMethod
+        urlRequest.httpBody = try ResourceEncoder.shared.encode(httpBody)
         
         return urlRequest
     }

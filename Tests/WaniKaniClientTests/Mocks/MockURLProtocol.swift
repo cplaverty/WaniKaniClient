@@ -1,5 +1,6 @@
 import Foundation
 import XCTest
+@testable import WaniKaniClient
 
 final class MockURLProtocol: URLProtocol {
     typealias RequestHandler = ((URLRequest) throws -> (HTTPURLResponse, Data))
@@ -15,13 +16,20 @@ final class MockURLProtocol: URLProtocol {
     static var requestHandler = [URL: RequestHandler]()
     
     override func startLoading() {
-        guard let url = request.url, let handler = MockURLProtocol.requestHandler[url] else {
-            XCTFail("Received unexpected request with no handler set")
-            return
-        }
+        let url = request.url!
         
         do {
-            let (response, data) = try handler(request)
+            let response: HTTPURLResponse
+            let data: Data
+            
+            if let handler = MockURLProtocol.requestHandler[url] {
+                (response, data) = try handler(request)
+            } else {
+                response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)!
+                let error = WaniKaniAPIError(error: "No handler set for URL: \(url)", code: 404)
+                data = try JSONEncoder().encode(error)
+            }
+            
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocol(self, didLoad: data)
             client?.urlProtocolDidFinishLoading(self)
