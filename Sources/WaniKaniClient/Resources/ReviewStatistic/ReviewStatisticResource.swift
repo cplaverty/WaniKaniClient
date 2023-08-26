@@ -5,7 +5,7 @@ import Foundation
 /// Review statistics summarize the activity recorded in reviews. They contain the sum of the number of correct and
 /// incorrect answers for both meaning and reading. They track current and maximum streaks of correct answers.
 /// They store the overall percentage of correct answers versus total answers.
-public struct ReviewStatisticResource: WaniKaniResource {
+public struct ReviewStatisticResource: WaniKaniResource, Equatable {
     /// Unique identifier of the review statistic.
     public var id: Int
     /// The kind of object returned.

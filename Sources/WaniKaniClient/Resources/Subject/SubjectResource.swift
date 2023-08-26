@@ -3,7 +3,7 @@ import Foundation
 /// Subjects are the radicals, kanji, vocabulary, and kana vocabulary that are learned through lessons and reviews.
 /// They contain basic dictionary information, such as meanings and/or readings, and information about their
 /// relationship to other items with WaniKani, like their level.
-public struct SubjectResource: WaniKaniResource {
+public struct SubjectResource: WaniKaniResource, Equatable {
     /// Unique identifier of the subject.
     public var id: Int
     /// The kind of object returned.

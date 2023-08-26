@@ -1,7 +1,7 @@
 import Foundation
 
 /// Available voice actors used for vocabulary reading pronunciation audio.
-public struct VoiceActorResource: WaniKaniResource {
+public struct VoiceActorResource: WaniKaniResource, Equatable {
     /// Unique identifier of the voice actor.
     public var id: Int
     /// The kind of object returned.

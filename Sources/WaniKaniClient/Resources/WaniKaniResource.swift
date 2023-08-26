@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol WaniKaniResource: Codable, Equatable {
+public protocol WaniKaniResource: Codable {
     /// The kind of object returned.
     var objectType: ResourceObjectType { get }
     /// The URL of the request.

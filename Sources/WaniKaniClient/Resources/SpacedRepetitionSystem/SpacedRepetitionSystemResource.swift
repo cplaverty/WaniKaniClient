@@ -2,7 +2,7 @@ import Foundation
 
 /// Available spaced repetition systems used for calculating SRS state changes to ``AssignmentResourceData`` and
 /// ``ReviewResourceData``. Has relationship with ``SubjectResource``.
-public struct SpacedRepetitionSystemResource: WaniKaniResource {
+public struct SpacedRepetitionSystemResource: WaniKaniResource, Equatable {
     /// Unique identifier of the spaced repetition system.
     public var id: Int
     /// The kind of object returned.

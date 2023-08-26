@@ -2,7 +2,7 @@ import Foundation
 
 /// When a review is registered, the associated ``AssignmentResource`` and ``ReviewStatisticResource`` are both
 /// updated. These are returned in ``resourcesUpdated``.
-public struct CreatedReviewResource: WaniKaniResource {
+public struct CreatedReviewResource: WaniKaniResource, Equatable {
     /// Unique identifier of the review.
     public var id: Int
     /// The kind of object returned.

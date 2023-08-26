@@ -1,7 +1,7 @@
 import Foundation
 
 /// The user summary returns basic information for the user making the API request, identified by their API key.
-public struct UserResource: WaniKaniResource {
+public struct UserResource: WaniKaniResource, Equatable {
     /// The kind of object returned.
     public let objectType: ResourceObjectType = .user
     /// The URL of the request.

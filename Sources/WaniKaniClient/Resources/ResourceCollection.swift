@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ResourceCollection<Resource: WaniKaniResource>: Codable, Equatable {
+public struct ResourceCollection<Resource: WaniKaniResource>: Codable {
     public let objectType: ResourceObjectType = .collection
     public var url: URL
     public var pages: ResourceCollectionPages
@@ -29,3 +29,5 @@ public struct ResourceCollection<Resource: WaniKaniResource>: Codable, Equatable
         case data
     }
 }
+
+extension ResourceCollection: Equatable where Resource: Equatable {}

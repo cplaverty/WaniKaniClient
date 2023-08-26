@@ -4,7 +4,7 @@ import Foundation
 /// records are created when a user answers all the parts of a subject correctly once; some subjects have both
 /// meaning or reading parts, and some only have one or the other. Note that reviews are not created for the quizzes
 /// in lessons.
-public struct ReviewResource: WaniKaniResource {
+public struct ReviewResource: WaniKaniResource, Equatable {
     /// Unique identifier of the review.
     public var id: Int
     /// The kind of object returned.

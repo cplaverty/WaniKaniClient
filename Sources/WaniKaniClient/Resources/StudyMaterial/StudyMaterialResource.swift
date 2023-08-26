@@ -2,7 +2,7 @@ import Foundation
 
 /// Study materials store user-specific notes and synonyms for a given subject. The records are created as soon as
 /// the user enters any study information.
-public struct StudyMaterialResource: WaniKaniResource {
+public struct StudyMaterialResource: WaniKaniResource, Equatable {
     /// Unique identifier of the study material.
     public var id: Int
     /// The kind of object returned.

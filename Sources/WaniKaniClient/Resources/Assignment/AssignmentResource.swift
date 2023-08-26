@@ -3,7 +3,7 @@ import Foundation
 /// Assignments contain information about a user's progress on a particular subject, including their current state and
 /// timestamps for various progress milestones. Assignments are created when a user has passed all the components of
 /// the given subject and the assignment is at or below their current level for the first time.
-public struct AssignmentResource: WaniKaniResource {
+public struct AssignmentResource: WaniKaniResource, Equatable {
     /// Unique identifier of the assignment.
     public var id: Int
     /// The kind of object returned.

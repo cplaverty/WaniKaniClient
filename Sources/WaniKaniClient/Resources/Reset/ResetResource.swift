@@ -5,7 +5,7 @@ import Foundation
 /// Users can reset their progress back to any level at or below their current level. When they reset to a particular
 /// level, all of the ``AssignmentResource`` and ``ReviewStatisticResource`` at that level or higher are set back
 /// to their default state.
-public struct ResetResource: WaniKaniResource {
+public struct ResetResource: WaniKaniResource, Equatable {
     /// Unique identifier of the reset.
     public var id: Int
     /// The kind of object returned.
