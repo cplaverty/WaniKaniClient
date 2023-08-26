@@ -25,40 +25,31 @@ final class RadicalResourceDataTests: XCTestCase {
                 characterImages: [
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/a7w32gazaor51ii0fbtxzk0wpmpc")!,
-                        metadata: RadicalCharacterImageMetadata(color: nil, dimensions: nil, styleName: nil, inlineStyles: false),
-                        contentType: "image/svg+xml"),
+                        metadata: RadicalCharacterSvgImageMetadata(inlineStyles: false)),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/fxufa23ht9uh0tkedo1zx5jemaio")!,
-                        metadata: RadicalCharacterImageMetadata(color: nil, dimensions: nil, styleName: nil, inlineStyles: true),
-                        contentType: "image/svg+xml"),
+                        metadata: RadicalCharacterSvgImageMetadata(inlineStyles: true)),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/4lxmimfbwuvl07s11dq0f9til0mb")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "1024x1024", styleName: "original", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "1024x1024", styleName: "original")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/3n3dlzyjjgou47qb4h4uewghcfcx")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "1024x1024", styleName: "1024px", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "1024x1024", styleName: "1024px")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/9d5fax4vrjp28vms1jb11ouu37vi")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "512x512", styleName: "512px", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "512x512", styleName: "512px")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/gfwzjl41i5v5oiwrsjz5zz957nww")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "256x256", styleName: "256px", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "256x256", styleName: "256px")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/m79ver1yfujpkcfa0bo5tcueuxk3")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "128x128", styleName: "128px", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "128x128", styleName: "128px")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/gcqkjhbw9aguieat8yrqxz09qszn")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "64x64", styleName: "64px", inlineStyles: nil),
-                        contentType: "image/png"),
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "64x64", styleName: "64px")),
                     RadicalCharacterImage(
                         url: URL(string: "https://files.wanikani.com/7czfgjlgsjxx8sndvfkezts6ugj1")!,
-                        metadata: RadicalCharacterImageMetadata(color: "#000000", dimensions: "32x32", styleName: "32px", inlineStyles: nil),
-                        contentType: "image/png")
+                        metadata: RadicalCharacterPngImageMetadata(color: "#000000", dimensions: "32x32", styleName: "32px"))
                 ],
                 meanings: [Meaning(meaning: "Ground", isPrimary: true, isAcceptedAnswer: true)],
                 auxiliaryMeanings: [],
