@@ -52,3 +52,15 @@ for try await subjectsCollection in client.resources(for: subjectsRequest) {
     print("Received \(subjectsCollection.data.count) subjects")
 }
 ```
+
+### Update single resource
+
+Updating a single resource through the WaniKani API uses `WaniKaniClient.updateResource(for:)`, passing a request object that contains the parameters for the resource update request.
+
+For example, creating a review would be done through passing a `CreateReviewRequest` object. Here, we create a review for the subject which has an ID of 1:
+
+```swift
+let createReviewRequest = CreateReviewRequest(subjectID: 1, incorrectMeaningAnswers: 0, incorrectReadingAnswers: 0)
+let createdReview = try await client.updateResource(for: createReviewRequest)
+print("The SRS stage changed from \(createdReview.data.startingSRSStage) to \(createdReview.data.endingSRSStage)")
+```
