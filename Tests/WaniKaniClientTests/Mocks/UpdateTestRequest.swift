@@ -2,7 +2,7 @@ import Foundation
 @testable import WaniKaniClient
 
 struct UpdateTestRequest {
-    let requestURL: URL
+    let url: URL
     let updated: TestResource
 }
 

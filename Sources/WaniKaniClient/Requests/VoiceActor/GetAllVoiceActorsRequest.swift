@@ -17,7 +17,7 @@ public struct GetAllVoiceActorsRequest {
 extension GetAllVoiceActorsRequest: ResourceCollectionGetRequest {
     public typealias Resource = VoiceActorResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.voiceActors
         
         var queryItems = [URLQueryItem]()

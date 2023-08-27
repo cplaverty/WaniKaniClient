@@ -9,7 +9,7 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testHidden() {
@@ -17,7 +17,7 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest(isHidden: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -25,7 +25,7 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest(ids: [79_854_763, 80_653_472])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectIDs() {
@@ -33,7 +33,7 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest(subjectIDs: [1, 243, 440])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectTypes() {
@@ -41,7 +41,7 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest(subjectTypes: [.radical, .kanji])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -50,6 +50,6 @@ final class GetAllStudyMaterialsRequestTests: XCTestCase {
         
         let request = GetAllStudyMaterialsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

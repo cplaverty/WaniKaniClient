@@ -18,7 +18,7 @@ public struct GetAllSpacedRepetitionSystemsRequest {
 extension GetAllSpacedRepetitionSystemsRequest: ResourceCollectionGetRequest {
     public typealias Resource = SpacedRepetitionSystemResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.spacedRepetitionSystems
         
         var queryItems = [URLQueryItem]()

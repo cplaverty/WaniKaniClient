@@ -9,7 +9,7 @@ final class GetAllSpacedRepetitionSystemsRequestTests: XCTestCase {
         
         let request = GetAllSpacedRepetitionSystemsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -17,7 +17,7 @@ final class GetAllSpacedRepetitionSystemsRequestTests: XCTestCase {
         
         let request = GetAllSpacedRepetitionSystemsRequest(ids: [1, 2])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -26,6 +26,6 @@ final class GetAllSpacedRepetitionSystemsRequestTests: XCTestCase {
         
         let request = GetAllSpacedRepetitionSystemsRequest(updatedAfter: Date.makeUTC(year: 2021, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

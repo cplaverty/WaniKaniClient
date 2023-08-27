@@ -9,7 +9,7 @@ final class GetLevelProgressionRequestTests: XCTestCase {
         
         let request = GetLevelProgressionRequest(id: 1)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testLargeID() {
@@ -17,6 +17,6 @@ final class GetLevelProgressionRequestTests: XCTestCase {
         
         let request = GetLevelProgressionRequest(id: 1_234_567_890)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

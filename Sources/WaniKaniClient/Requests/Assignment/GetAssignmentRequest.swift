@@ -13,7 +13,7 @@ public struct GetAssignmentRequest {
 extension GetAssignmentRequest: ResourceGetRequest {
     public typealias Resource = AssignmentResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.assignments.appendingPathComponent("\(id)")
     }
 }

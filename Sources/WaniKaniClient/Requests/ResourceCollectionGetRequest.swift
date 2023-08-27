@@ -5,5 +5,5 @@ public protocol ResourceCollectionGetRequest {
     associatedtype Resource: WaniKaniResource
     
     /// The URL of the request.
-    var requestURL: URL { get }
+    var url: URL { get }
 }

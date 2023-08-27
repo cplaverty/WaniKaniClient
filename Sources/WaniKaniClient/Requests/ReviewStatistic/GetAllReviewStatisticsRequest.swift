@@ -38,7 +38,7 @@ public struct GetAllReviewStatisticsRequest {
 extension GetAllReviewStatisticsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ReviewStatisticResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.reviewStatistics
         
         var queryItems = [URLQueryItem]()

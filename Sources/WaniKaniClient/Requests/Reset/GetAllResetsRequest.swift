@@ -17,7 +17,7 @@ public struct GetAllResetsRequest {
 extension GetAllResetsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ResetResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.resets
         
         var queryItems = [URLQueryItem]()

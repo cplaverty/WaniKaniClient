@@ -25,7 +25,7 @@ public struct UpdateStudyMaterialRequest {
 extension UpdateStudyMaterialRequest: ResourceUpdateRequest {
     public typealias Resource = StudyMaterialResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.studyMaterials.appendingPathComponent("\(id)")
     }
     

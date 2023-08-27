@@ -25,7 +25,7 @@ public struct GetAllReviewsRequest {
 extension GetAllReviewsRequest: ResourceCollectionGetRequest {
     public typealias Resource = ReviewResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.reviews
         
         var queryItems = [URLQueryItem]()

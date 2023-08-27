@@ -14,7 +14,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(defaultVoiceActorID: 1))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -30,7 +30,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(extraStudyAutoplayAudio: false))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -46,7 +46,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(lessonsAutoplayAudio: true))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -62,7 +62,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(lessonsBatchSize: 3))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -78,7 +78,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(lessonsPresentationOrder: .shuffled))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -94,7 +94,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(reviewsAutoplayAudio: true))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -110,7 +110,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(reviewsDisplaySRSIndicator: false))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -126,7 +126,7 @@ final class UpdateUserRequestTests: XCTestCase {
         let request = UpdateUserRequest(preferences: UserPreferencesUpdate(reviewsPresentationOrder: .shuffled))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -151,7 +151,7 @@ final class UpdateUserRequestTests: XCTestCase {
                 reviewsPresentationOrder: .shuffled))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)

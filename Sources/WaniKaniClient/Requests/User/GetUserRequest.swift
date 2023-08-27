@@ -9,7 +9,7 @@ public struct GetUserRequest {
 extension GetUserRequest: ResourceGetRequest {
     public typealias Resource = UserResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.user
     }
 }

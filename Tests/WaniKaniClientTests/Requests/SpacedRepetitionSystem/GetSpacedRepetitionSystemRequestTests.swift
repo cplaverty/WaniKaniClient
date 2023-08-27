@@ -9,7 +9,7 @@ final class GetSpacedRepetitionSystemRequestTests: XCTestCase {
         
         let request = GetSpacedRepetitionSystemRequest(id: 1)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testLargeID() {
@@ -17,6 +17,6 @@ final class GetSpacedRepetitionSystemRequestTests: XCTestCase {
         
         let request = GetSpacedRepetitionSystemRequest(id: 1_234_567_890)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

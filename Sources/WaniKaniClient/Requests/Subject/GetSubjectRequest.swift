@@ -13,7 +13,7 @@ public struct GetSubjectRequest {
 extension GetSubjectRequest: ResourceGetRequest {
     public typealias Resource = SubjectResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.subjects.appendingPathComponent("\(id)")
     }
 }

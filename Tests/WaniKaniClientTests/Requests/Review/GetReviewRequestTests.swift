@@ -9,7 +9,7 @@ final class GetReviewRequestTests: XCTestCase {
         
         let request = GetReviewRequest(id: 1)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testLargeID() {
@@ -17,6 +17,6 @@ final class GetReviewRequestTests: XCTestCase {
         
         let request = GetReviewRequest(id: 1_234_567_890)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

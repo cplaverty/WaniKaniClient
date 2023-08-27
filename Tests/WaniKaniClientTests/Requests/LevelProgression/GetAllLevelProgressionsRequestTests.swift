@@ -9,7 +9,7 @@ final class GetAllLevelProgressionsRequestTests: XCTestCase {
         
         let request = GetAllLevelProgressionsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -17,7 +17,7 @@ final class GetAllLevelProgressionsRequestTests: XCTestCase {
         
         let request = GetAllLevelProgressionsRequest(ids: [3887, 3943, 4234, 4432])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -26,6 +26,6 @@ final class GetAllLevelProgressionsRequestTests: XCTestCase {
         
         let request = GetAllLevelProgressionsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

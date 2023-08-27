@@ -27,7 +27,7 @@ public struct CreateStudyMaterialRequest {
 extension CreateStudyMaterialRequest: ResourceUpdateRequest, Codable {
     public typealias Resource = StudyMaterialResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.studyMaterials
     }
     

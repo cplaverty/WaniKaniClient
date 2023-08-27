@@ -9,7 +9,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testHidden() {
@@ -17,7 +17,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(isHidden: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -25,7 +25,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(ids: [79_854_763, 80_653_472])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testPercentagesGreaterThan() {
@@ -33,7 +33,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(percentagesGreaterThan: 84)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testPercentagesLessThan() {
@@ -41,7 +41,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(percentagesLessThan: 30)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectIDs() {
@@ -49,7 +49,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(subjectIDs: [1, 243, 440])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectTypes() {
@@ -57,7 +57,7 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(subjectTypes: [.radical, .kanji])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -66,6 +66,6 @@ final class GetAllReviewStatisticsRequestTests: XCTestCase {
         
         let request = GetAllReviewStatisticsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

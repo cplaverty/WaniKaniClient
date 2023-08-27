@@ -4,5 +4,5 @@ import Foundation
 struct GetAllTestsRequest: ResourceCollectionGetRequest {
     typealias Resource = TestResource
     
-    let requestURL: URL
+    let url: URL
 }

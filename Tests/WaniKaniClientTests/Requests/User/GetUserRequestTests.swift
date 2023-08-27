@@ -8,7 +8,7 @@ final class GetUserRequestTests: XCTestCase {
         let expected = URL(string: "user", relativeTo: baseURL)!.absoluteURL
         
         let request = GetUserRequest()
-        let url = request.requestURL
+        let url = request.url
         
         XCTAssertEqual(url, expected)
     }

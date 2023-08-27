@@ -9,7 +9,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDsSingle() {
@@ -17,7 +17,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(ids: [110])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDsMultiple() {
@@ -25,7 +25,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(ids: [1, 243, 440])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testTypes() {
@@ -33,7 +33,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(types: [.radical, .kanji])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSlugs() {
@@ -41,7 +41,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(slugs: ["tree", "ground", "river"])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testLevels() {
@@ -49,7 +49,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(levels: [2, 4, 6, 8, 10])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testHidden() {
@@ -57,7 +57,7 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(isHidden: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -66,6 +66,6 @@ final class GetAllSubjectsRequestTests: XCTestCase {
         
         let request = GetAllSubjectsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

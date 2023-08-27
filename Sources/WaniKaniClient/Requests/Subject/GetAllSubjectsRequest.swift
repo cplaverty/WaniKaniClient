@@ -33,7 +33,7 @@ public struct GetAllSubjectsRequest {
 extension GetAllSubjectsRequest: ResourceCollectionGetRequest {
     public typealias Resource = SubjectResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.subjects
         
         var queryItems = [URLQueryItem]()

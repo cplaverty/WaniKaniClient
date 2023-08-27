@@ -13,7 +13,7 @@ public struct GetSpacedRepetitionSystemRequest {
 extension GetSpacedRepetitionSystemRequest: ResourceGetRequest {
     public typealias Resource = SpacedRepetitionSystemResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.spacedRepetitionSystems.appendingPathComponent("\(id)")
     }
 }

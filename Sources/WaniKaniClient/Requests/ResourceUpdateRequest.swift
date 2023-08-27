@@ -5,7 +5,7 @@ public protocol ResourceUpdateRequest {
     associatedtype Resource: WaniKaniResource
     
     /// The URL of the request.
-    var requestURL: URL { get }
+    var url: URL { get }
     /// The HTTP request method.
     var httpMethod: String { get }
     /// The object to be encoded and sent as the message body of the request.

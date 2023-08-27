@@ -21,7 +21,7 @@ public struct GetAllLevelProgressionsRequest {
 extension GetAllLevelProgressionsRequest: ResourceCollectionGetRequest {
     public typealias Resource = LevelProgressionResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.levelProgressions
         
         var queryItems = [URLQueryItem]()

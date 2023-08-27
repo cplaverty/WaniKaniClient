@@ -29,7 +29,7 @@ public struct GetAllStudyMaterialsRequest {
 extension GetAllStudyMaterialsRequest: ResourceCollectionGetRequest {
     public typealias Resource = StudyMaterialResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.studyMaterials
         
         var queryItems = [URLQueryItem]()

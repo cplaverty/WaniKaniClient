@@ -29,7 +29,7 @@ public struct StartAssignmentRequest {
 extension StartAssignmentRequest: ResourceUpdateRequest {
     public typealias Resource = AssignmentResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.assignments
             .appendingPathComponent("\(id)")
             .appendingPathComponent("start")

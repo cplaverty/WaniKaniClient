@@ -75,7 +75,7 @@ public struct GetAllAssignmentsRequest {
 extension GetAllAssignmentsRequest: ResourceCollectionGetRequest {
     public typealias Resource = AssignmentResource
     
-    public var requestURL: URL {
+    public var url: URL {
         let url = ResourceEndpoints.shared.assignments
         
         var queryItems = [URLQueryItem]()

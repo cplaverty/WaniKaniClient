@@ -13,7 +13,7 @@ public struct GetStudyMaterialRequest {
 extension GetStudyMaterialRequest: ResourceGetRequest {
     public typealias Resource = StudyMaterialResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.studyMaterials.appendingPathComponent("\(id)")
     }
 }

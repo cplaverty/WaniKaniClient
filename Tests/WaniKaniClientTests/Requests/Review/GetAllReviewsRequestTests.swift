@@ -9,7 +9,7 @@ final class GetAllReviewsRequestTests: XCTestCase {
         
         let request = GetAllReviewsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testAssignmentIDs() {
@@ -17,7 +17,7 @@ final class GetAllReviewsRequestTests: XCTestCase {
         
         let request = GetAllReviewsRequest(assignmentIDs: [79_854_763, 80_653_472])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -25,7 +25,7 @@ final class GetAllReviewsRequestTests: XCTestCase {
         
         let request = GetAllReviewsRequest(ids: [3887, 3943, 4234, 4432])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectIDs() {
@@ -33,7 +33,7 @@ final class GetAllReviewsRequestTests: XCTestCase {
         
         let request = GetAllReviewsRequest(subjectIDs: [1, 243, 440])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -42,6 +42,6 @@ final class GetAllReviewsRequestTests: XCTestCase {
         
         let request = GetAllReviewsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

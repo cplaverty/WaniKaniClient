@@ -45,7 +45,7 @@ public struct CreateReviewRequest {
 extension CreateReviewRequest: ResourceUpdateRequest, Codable {
     public typealias Resource = CreatedReviewResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.reviews
     }
     

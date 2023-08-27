@@ -17,7 +17,7 @@ public final class WaniKaniClient: ResourceRequestClient {
     }
     
     public func resource<Request: ResourceGetRequest>(for request: Request) async throws -> Request.Resource {
-        let urlRequest = makeURLRequest(url: request.requestURL)
+        let urlRequest = makeURLRequest(url: request.url)
         let resource = try await decode(Request.Resource.self, for: urlRequest)
         logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
         return resource
@@ -27,7 +27,7 @@ public final class WaniKaniClient: ResourceRequestClient {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
-                    var nextURL: URL? = request.requestURL
+                    var nextURL: URL? = request.url
                     
                     while let url = nextURL {
                         try Task.checkCancellation()
@@ -51,7 +51,7 @@ public final class WaniKaniClient: ResourceRequestClient {
     }
     
     public func updateResource<Request: ResourceUpdateRequest>(for request: Request) async throws -> Request.Resource {
-        let urlRequest = try makeURLRequest(url: request.requestURL, httpMethod: request.httpMethod, httpBody: request.bodyContent)
+        let urlRequest = try makeURLRequest(url: request.url, httpMethod: request.httpMethod, httpBody: request.bodyContent)
         let resource = try await decode(Request.Resource.self, for: urlRequest)
         logger.log("Updated resource of type \(Request.Resource.self, privacy: .public)")
         return resource

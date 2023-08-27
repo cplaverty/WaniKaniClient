@@ -16,7 +16,7 @@ final class CreateStudyMaterialRequestTests: XCTestCase {
             meaningNote: "meaning note")
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -34,7 +34,7 @@ final class CreateStudyMaterialRequestTests: XCTestCase {
             readingNote: "reading note")
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -52,7 +52,7 @@ final class CreateStudyMaterialRequestTests: XCTestCase {
             meaningSynonyms: ["synonym 1", "synonym 2"])
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -72,7 +72,7 @@ final class CreateStudyMaterialRequestTests: XCTestCase {
             meaningSynonyms: ["synonym 1", "synonym 2"])
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)

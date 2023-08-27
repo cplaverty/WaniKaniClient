@@ -14,7 +14,7 @@ final class StartAssignmentRequestTests: XCTestCase {
         let request = StartAssignmentRequest(id: 1)
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -32,7 +32,7 @@ final class StartAssignmentRequestTests: XCTestCase {
             startedAt: Date.makeUTC(year: 2023, month: 8, day: 14, hour: 19, minute: 15, second: 8, microsecond: 764623))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)

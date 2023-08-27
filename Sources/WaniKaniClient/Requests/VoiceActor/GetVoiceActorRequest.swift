@@ -13,7 +13,7 @@ public struct GetVoiceActorRequest {
 extension GetVoiceActorRequest: ResourceGetRequest {
     public typealias Resource = VoiceActorResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.voiceActors.appendingPathComponent("\(id)")
     }
 }

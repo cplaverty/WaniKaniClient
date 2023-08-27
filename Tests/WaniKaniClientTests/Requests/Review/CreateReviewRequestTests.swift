@@ -17,7 +17,7 @@ final class CreateReviewRequestTests: XCTestCase {
             incorrectReadingAnswers: 2)
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -37,7 +37,7 @@ final class CreateReviewRequestTests: XCTestCase {
             createdAt: Date.makeUTC(year: 2017, month: 9, day: 30, hour: 1, minute: 42, second: 13, microsecond: 453291))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -56,7 +56,7 @@ final class CreateReviewRequestTests: XCTestCase {
             incorrectReadingAnswers: 0)
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)
@@ -76,7 +76,7 @@ final class CreateReviewRequestTests: XCTestCase {
             createdAt: Date.makeUTC(year: 2017, month: 9, day: 30, hour: 1, minute: 42, second: 13, microsecond: 453291))
         let bodyContentData = try encoder.encode(request.bodyContent)
         
-        XCTAssertEqual(request.requestURL, expectedURL)
+        XCTAssertEqual(request.url, expectedURL)
         XCTAssertEqual(request.httpMethod, expectedHTTPMethod)
         let bodyContent = String(data: bodyContentData, encoding: .utf8)
         XCTAssertEqual(bodyContent, expectedBodyContent)

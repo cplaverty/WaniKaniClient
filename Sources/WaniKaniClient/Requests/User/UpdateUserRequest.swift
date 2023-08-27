@@ -13,7 +13,7 @@ public struct UpdateUserRequest {
 extension UpdateUserRequest: ResourceUpdateRequest, Codable {
     public typealias Resource = UserResource
     
-    public var requestURL: URL {
+    public var url: URL {
         return ResourceEndpoints.shared.user
     }
     

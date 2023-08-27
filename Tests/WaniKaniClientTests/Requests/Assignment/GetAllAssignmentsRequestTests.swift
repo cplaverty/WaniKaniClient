@@ -9,7 +9,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest()
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testAvailableAfter() {
@@ -18,7 +18,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(availableAfter: Date.makeUTC(year: 2019, month: 9, day: 3, hour: 14, minute: 15, second: 30, microsecond: 327509))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testAvailableBefore() {
@@ -27,7 +27,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(availableBefore: Date.makeUTC(year: 2019, month: 8, day: 5, hour: 22, minute: 26, second: 54, microsecond: 548723))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testBurned() {
@@ -35,7 +35,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(isBurned: false)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testHidden() {
@@ -43,7 +43,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(isHidden: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testIDs() {
@@ -51,7 +51,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(ids: [79_854_763, 80_653_472])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testImmediatelyAvailableForLessons() {
@@ -59,7 +59,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(immediatelyAvailableForLessons: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testImmediatelyAvailableForReview() {
@@ -67,7 +67,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(immediatelyAvailableForReview: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testInReview() {
@@ -75,7 +75,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(inReview: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testLevels() {
@@ -83,7 +83,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(levels: [2, 4, 6, 8, 10])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSRSStages() {
@@ -91,7 +91,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(srsStages: [9])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testStarted() {
@@ -99,7 +99,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(isStarted: false)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectIDs() {
@@ -107,7 +107,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(subjectIDs: [1, 243, 440])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testSubjectTypes() {
@@ -115,7 +115,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(subjectTypes: [.radical, .kanji])
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUnlocked() {
@@ -123,7 +123,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(isUnlocked: true)
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
     
     func testUpdatedAfter() {
@@ -132,6 +132,6 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
         
         let request = GetAllAssignmentsRequest(updatedAfter: Date.makeUTC(year: 2019, month: 3, day: 1, hour: 18, minute: 10, second: 34, microsecond: 873542))
         
-        XCTAssertEqual(request.requestURL, expected)
+        XCTAssertEqual(request.url, expected)
     }
 }

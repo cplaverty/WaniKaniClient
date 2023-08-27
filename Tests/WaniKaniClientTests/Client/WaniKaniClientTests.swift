@@ -27,7 +27,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
+            let resource = try await client.resource(for: GetTestRequest(url: requestURL))
             XCTAssertEqual(resource, expected)
             
             expect.fulfill()
@@ -62,7 +62,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resources = try await client.resources(for: GetAllTestsRequest(requestURL: requestURL))
+            let resources = try await client.resources(for: GetAllTestsRequest(url: requestURL))
                 .reduce(into: [], { $0.append($1) })
             XCTAssertEqual(resources, expected)
             
@@ -113,7 +113,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resources = try await client.resources(for: GetAllTestsRequest(requestURL: requestURL))
+            let resources = try await client.resources(for: GetAllTestsRequest(url: requestURL))
                 .reduce(into: [], { $0.append($1) })
             XCTAssertEqual(resources, expected)
             
@@ -153,7 +153,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            var iter = client.resources(for: GetAllTestsRequest(requestURL: requestURL)).makeAsyncIterator()
+            var iter = client.resources(for: GetAllTestsRequest(url: requestURL)).makeAsyncIterator()
             
             let first = try await iter.next()
             XCTAssertEqual(first, expected)
@@ -206,7 +206,7 @@ final class WaniKaniClientTests: XCTestCase {
         let expect = expectation(description: "request")
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
-            let resource = try await client.updateResource(for: UpdateTestRequest(requestURL: requestURL, updated: expected))
+            let resource = try await client.updateResource(for: UpdateTestRequest(url: requestURL, updated: expected))
             XCTAssertEqual(resource, expected)
             
             expect.fulfill()
@@ -233,7 +233,7 @@ final class WaniKaniClientTests: XCTestCase {
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
             do {
-                let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
+                let resource = try await client.resource(for: GetTestRequest(url: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
             } catch WaniKaniClientError.invalidAPIKey {
                 // Expected error
@@ -265,7 +265,7 @@ final class WaniKaniClientTests: XCTestCase {
         let client = WaniKaniClient(apiKey: apiKey, urlSession: urlSession)
         Task {
             do {
-                let resource = try await client.resource(for: GetTestRequest(requestURL: requestURL))
+                let resource = try await client.resource(for: GetTestRequest(url: requestURL))
                 XCTFail("Request was not expected to succeed but got resource: \(resource)")
             } catch WaniKaniClientError.apiError(let error, let code) {
                 XCTAssertEqual(error, "Not found", "Unexpected error message")
