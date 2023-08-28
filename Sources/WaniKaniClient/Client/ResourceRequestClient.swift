@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol ResourceRequestClient {
-    func resource<Request: ResourceGetRequest>(for request: Request) async throws -> Request.Resource
-    func resources<Request: ResourceCollectionGetRequest>(for request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error>
-    func updateResource<Request: ResourceUpdateRequest>(for request: Request) async throws -> Request.Resource
+    func resource<Resource>(for request: some ResourceGetRequest<Resource>) async throws -> Resource
+    func resources<Resource>(for request: some ResourceCollectionGetRequest<Resource>) -> AsyncThrowingStream<ResourceCollection<Resource>, Error>
+    func updateResource<Resource>(for request: some ResourceUpdateRequest<Resource>) async throws -> Resource
 }

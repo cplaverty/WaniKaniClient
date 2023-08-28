@@ -1,7 +1,7 @@
 import Foundation
 
 /// Request to create or update a single resource using an HTTP `POST` or `PUT` request.
-public protocol ResourceUpdateRequest {
+public protocol ResourceUpdateRequest<Resource> {
     associatedtype Resource: WaniKaniResource
     
     /// The URL of the request.

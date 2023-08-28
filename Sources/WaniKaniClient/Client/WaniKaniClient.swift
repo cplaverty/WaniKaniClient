@@ -16,14 +16,14 @@ public final class WaniKaniClient: ResourceRequestClient {
         urlSession.invalidateAndCancel()
     }
     
-    public func resource<Request: ResourceGetRequest>(for request: Request) async throws -> Request.Resource {
+    public func resource<Resource>(for request: some ResourceGetRequest<Resource>) async throws -> Resource {
         let urlRequest = makeURLRequest(url: request.url)
-        let resource = try await decode(Request.Resource.self, for: urlRequest)
-        logger.log("Loaded resource of type \(Request.Resource.self, privacy: .public)")
+        let resource = try await decode(Resource.self, for: urlRequest)
+        logger.log("Loaded resource of type \(Resource.self, privacy: .public)")
         return resource
     }
     
-    public func resources<Request: ResourceCollectionGetRequest>(for request: Request) -> AsyncThrowingStream<ResourceCollection<Request.Resource>, Error> {
+    public func resources<Resource>(for request: some ResourceCollectionGetRequest<Resource>) -> AsyncThrowingStream<ResourceCollection<Resource>, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
@@ -33,8 +33,8 @@ public final class WaniKaniClient: ResourceRequestClient {
                         try Task.checkCancellation()
                         
                         let urlRequest = makeURLRequest(url: url)
-                        let resourceCollection = try await decode(ResourceCollection<Request.Resource>.self, for: urlRequest)
-                        logger.log("Loaded collection of \(resourceCollection.data.count) item(s) of type \(Request.Resource.self, privacy: .public)")
+                        let resourceCollection = try await decode(ResourceCollection<Resource>.self, for: urlRequest)
+                        logger.log("Loaded collection of \(resourceCollection.data.count) item(s) of type \(Resource.self, privacy: .public)")
                         continuation.yield(resourceCollection)
                         
                         nextURL = resourceCollection.pages.nextURL
@@ -50,10 +50,10 @@ public final class WaniKaniClient: ResourceRequestClient {
         }
     }
     
-    public func updateResource<Request: ResourceUpdateRequest>(for request: Request) async throws -> Request.Resource {
+    public func updateResource<Resource>(for request: some ResourceUpdateRequest<Resource>) async throws -> Resource {
         let urlRequest = try makeURLRequest(url: request.url, httpMethod: request.httpMethod, httpBody: request.bodyContent)
-        let resource = try await decode(Request.Resource.self, for: urlRequest)
-        logger.log("Updated resource of type \(Request.Resource.self, privacy: .public)")
+        let resource = try await decode(Resource.self, for: urlRequest)
+        logger.log("Updated resource of type \(Resource.self, privacy: .public)")
         return resource
     }
     
