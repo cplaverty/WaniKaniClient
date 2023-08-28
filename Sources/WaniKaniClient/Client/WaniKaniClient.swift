@@ -1,11 +1,18 @@
 import Foundation
 
+/// Client for the WaniKani v2 API.
 public final class WaniKaniClient: ResourceRequestClient {
+    /// The revision of the WaniKani v2 API supported by this client.
     public static let apiRevision = "20170710"
     public let apiKey: String
     
     private let urlSession: URLSession
     
+    /// Creates a WaniKani API client.
+    /// 
+    /// - Parameters:
+    ///   - apiKey: The WaniKani v2 API Key.
+    ///   - urlSession: The underlying ``URLSession`` to use for the network requests.
     public init(apiKey: String,
                 urlSession: URLSession = .shared) {
         self.apiKey = apiKey
