@@ -42,13 +42,13 @@ extension GetAllReviewStatisticsRequest: ResourceCollectionGetRequest {
         let url = ResourceEndpoints.shared.reviewStatistics
         
         var queryItems = [URLQueryItem]()
-        queryItems.appendItemIfSet(name: "hidden", value: isHidden)
-        queryItems.appendItemsIfSet(name: "ids", values: ids)
-        queryItems.appendItemIfSet(name: "percentages_greater_than", value: percentagesGreaterThan)
-        queryItems.appendItemIfSet(name: "percentages_less_than", value: percentagesLessThan)
-        queryItems.appendItemsIfSet(name: "subject_ids", values: subjectIDs)
-        queryItems.appendItemsIfSet(name: "subject_types", values: subjectTypes)
-        queryItems.appendItemIfSet(name: "updated_after", value: updatedAfter)
+        queryItems.appendIfSet(name: "hidden", value: isHidden)
+        queryItems.appendIfSet(name: "ids", values: ids)
+        queryItems.appendIfSet(name: "percentages_greater_than", value: percentagesGreaterThan)
+        queryItems.appendIfSet(name: "percentages_less_than", value: percentagesLessThan)
+        queryItems.appendIfSet(name: "subject_ids", values: subjectIDs)
+        queryItems.appendIfSet(name: "subject_types", values: subjectTypes)
+        queryItems.appendIfSet(name: "updated_after", date: updatedAfter)
         
         guard !queryItems.isEmpty else {
             return url

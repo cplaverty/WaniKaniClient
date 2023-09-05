@@ -1,27 +1,31 @@
 import Foundation
 
 extension RangeReplaceableCollection where Element == URLQueryItem {
-    mutating func appendItemIfSet<T>(name: String, value: T?) {
+    mutating func appendIfTrue(name: String, condition: Bool?) {
+        guard condition == true else { return }
+        
+        append(URLQueryItem(name: name, value: nil))
+    }
+    
+    mutating func appendIfSet(name: String, date: Date?) {
+        guard let date else { return }
+        
+        append(URLQueryItem(name: name, value: waniKaniDateFormatter.string(from: date)))
+    }
+    
+    mutating func appendIfSet<T>(name: String, value: T?) {
         guard let value else { return }
         
         append(URLQueryItem(name: name, value: "\(value)"))
     }
     
-    mutating func appendItemIfSet(name: String, value: Date?) {
-        guard let value else { return }
-        
-        append(URLQueryItem(name: name, value: waniKaniDateFormatter.string(from: value)))
-    }
-    
-    mutating func appendItemsIfSet(name: String, values: [String]?) {
+    mutating func appendIfSet(name: String, values: (some Sequence<String>)?) {
         guard let values else { return }
         
         append(URLQueryItem(name: name, value: values.joined(separator: ",")))
     }
     
-    mutating func appendItemsIfSet<T>(name: String, values: [T]?) {
-        guard let values else { return }
-        
-        append(URLQueryItem(name: name, value: values.lazy.map({ "\($0)" }).joined(separator: ",")))
+    mutating func appendIfSet(name: String, values: (some Sequence)?) {
+        appendIfSet(name: name, values: values?.lazy.map({ "\($0)" }))
     }
 }

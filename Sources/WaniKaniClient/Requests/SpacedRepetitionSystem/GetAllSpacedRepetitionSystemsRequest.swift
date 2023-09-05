@@ -22,8 +22,8 @@ extension GetAllSpacedRepetitionSystemsRequest: ResourceCollectionGetRequest {
         let url = ResourceEndpoints.shared.spacedRepetitionSystems
         
         var queryItems = [URLQueryItem]()
-        queryItems.appendItemsIfSet(name: "ids", values: ids)
-        queryItems.appendItemIfSet(name: "updated_after", value: updatedAfter)
+        queryItems.appendIfSet(name: "ids", values: ids)
+        queryItems.appendIfSet(name: "updated_after", date: updatedAfter)
         
         guard !queryItems.isEmpty else {
             return url

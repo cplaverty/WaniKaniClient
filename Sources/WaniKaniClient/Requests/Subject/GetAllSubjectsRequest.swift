@@ -37,12 +37,12 @@ extension GetAllSubjectsRequest: ResourceCollectionGetRequest {
         let url = ResourceEndpoints.shared.subjects
         
         var queryItems = [URLQueryItem]()
-        queryItems.appendItemsIfSet(name: "ids", values: ids)
-        queryItems.appendItemsIfSet(name: "types", values: types)
-        queryItems.appendItemsIfSet(name: "slugs", values: slugs)
-        queryItems.appendItemsIfSet(name: "levels", values: levels)
-        queryItems.appendItemIfSet(name: "hidden", value: isHidden)
-        queryItems.appendItemIfSet(name: "updated_after", value: updatedAfter)
+        queryItems.appendIfSet(name: "ids", values: ids)
+        queryItems.appendIfSet(name: "types", values: types)
+        queryItems.appendIfSet(name: "slugs", values: slugs)
+        queryItems.appendIfSet(name: "levels", values: levels)
+        queryItems.appendIfSet(name: "hidden", value: isHidden)
+        queryItems.appendIfSet(name: "updated_after", date: updatedAfter)
         
         guard !queryItems.isEmpty else {
             return url

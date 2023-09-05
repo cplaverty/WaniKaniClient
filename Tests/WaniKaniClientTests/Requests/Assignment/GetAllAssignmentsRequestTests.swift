@@ -55,7 +55,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
     }
     
     func testImmediatelyAvailableForLessons() {
-        let expected = URL(string: "assignments?immediately_available_for_lessons=true", relativeTo: baseURL)!.absoluteURL
+        let expected = URL(string: "assignments?immediately_available_for_lessons", relativeTo: baseURL)!.absoluteURL
         
         let request = GetAllAssignmentsRequest(immediatelyAvailableForLessons: true)
         
@@ -63,7 +63,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
     }
     
     func testImmediatelyAvailableForReview() {
-        let expected = URL(string: "assignments?immediately_available_for_review=true", relativeTo: baseURL)!.absoluteURL
+        let expected = URL(string: "assignments?immediately_available_for_review", relativeTo: baseURL)!.absoluteURL
         
         let request = GetAllAssignmentsRequest(immediatelyAvailableForReview: true)
         
@@ -71,7 +71,7 @@ final class GetAllAssignmentsRequestTests: XCTestCase {
     }
     
     func testInReview() {
-        let expected = URL(string: "assignments?in_review=true", relativeTo: baseURL)!.absoluteURL
+        let expected = URL(string: "assignments?in_review", relativeTo: baseURL)!.absoluteURL
         
         let request = GetAllAssignmentsRequest(inReview: true)
         
