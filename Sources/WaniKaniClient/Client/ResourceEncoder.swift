@@ -15,7 +15,7 @@ final class ResourceEncoder {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .waniKani
         encoder.nonConformingFloatEncodingStrategy = .throw
-        encoder.outputFormatting = .sortedKeys
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         
         return try encoder.encode(value)
     }
