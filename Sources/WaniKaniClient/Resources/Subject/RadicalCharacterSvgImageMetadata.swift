@@ -1,5 +1,5 @@
 /// Metadata for images with content type `image/svg+xml`.
-public struct RadicalCharacterSvgImageMetadata: Codable, Equatable {
+public struct RadicalCharacterSvgImageMetadata: RadicalCharacterImageMetadata {
     /// Indicates if the SVG asset contains built-in CSS styling.
     public var inlineStyles: Bool
 

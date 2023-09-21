@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol SubjectResourceData {
+public protocol SubjectResourceData: Codable, Equatable {
     /// Collection of auxiliary meanings.
     var auxiliaryMeanings: [AuxiliaryMeaning] { get }
     /// Timestamp when the subject was created.

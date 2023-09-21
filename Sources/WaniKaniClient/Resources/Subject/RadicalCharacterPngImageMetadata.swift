@@ -1,5 +1,5 @@
 /// Metadata for images with content type `image/png`.
-public struct RadicalCharacterPngImageMetadata: Codable, Equatable {
+public struct RadicalCharacterPngImageMetadata: RadicalCharacterImageMetadata {
     /// Color of the asset in hexadecimal.
     public var color: String
     /// Dimension of the asset in pixels.
